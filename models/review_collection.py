@@ -16,6 +16,6 @@ class ReviewCollection:
                 for rev in data
             ]
 
-    def get_reviews(self):
+    def get_reviews_as_dicts(self):
         dict_reviews = [review.to_dict() for review in self.reviews]
         return dict_reviews

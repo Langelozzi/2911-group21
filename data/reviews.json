@@ -1,6 +1,6 @@
 [
     {
-        "User": "John Smith",
+        "UserEmail": "jsmith@my.bcit.ca",
         "Title": "Loved this course!!!",
         "Course": "ACIT 2911",
         "Instructor": "Johnny",
@@ -8,7 +8,7 @@
         "Rating": 5
     },
     {
-        "User": "Michael Tang",
+        "UserEmail": "mtang@my.bcit.ca",
         "Title": "Not great to say the best!!!",
         "Course": "ACIT 1620",
         "Instructor": "Alex Lau",
@@ -16,7 +16,7 @@
         "Rating": 2
     },
     {
-        "User": "Janet Brooker",
+        "UserEmail": "jbrooker@my.bcit.ca",
         "Title": "Best Instructor in CIT",
         "Course": "ACIT 2811",
         "Instructor": "Yves Rene Shema",
