@@ -18,7 +18,7 @@ class Review:
         self.content = review
         self.rating = rating 
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "User": self.user,
             "Title": self.title,
