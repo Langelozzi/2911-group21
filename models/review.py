@@ -6,7 +6,7 @@
 from models.user import User
 
 class Review:
-    def __init__(self, user: User, title: str, course: str, instructor: str, review: str, rating: int) -> None:
+    def __init__(self, user: str, title: str, course: str, instructor: str, review: str, rating: int) -> None:
         if rating not in (1,2,3,4,5):
             raise ValueError
         # will add more checks in later sprints^
