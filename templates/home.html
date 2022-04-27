@@ -5,11 +5,15 @@
 
 <body>
     <div class="jumbotron text-center">
-        <h1>home Page</h1>
+        <h1>Home</h1>
         <p>I have no idea what i'm doing</p>
     </div>
         <div class="container">
-            <h3>Home stuff</h3>
+            {% for item in reviews %}
+            <h1>{{item.User}}</h1>
+            <h3>{{item.Title}}</h3>
+            <h6>{{item.Course}}</h6>
+            {% endfor %}
         </div>
     </div>
 </body>
