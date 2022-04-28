@@ -10,9 +10,9 @@
     </div>
         <div class="container">
             {% for item in reviews %}
-            <h1>{{item.User}}</h1>
-            <h3>{{item.Title}}</h3>
-            <h6>{{item.Course}}</h6>
+            <h1>{{item.user_email}}</h1>
+            <h3>{{item.title}}</h3>
+            <h6>{{item.course}}</h6>
             {% endfor %}
         </div>
     </div>
