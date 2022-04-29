@@ -4,11 +4,12 @@
 
 # Imports:
 from models.user import User
+import datetime
 
 class Review:
     '''class to represent a review object'''
     
-    def __init__(self, user_email: str, title: str, course: str, instructor: str, review: str, rating: int) -> None:
+    def __init__(self, user_email: str, title: str, course: str, instructor: str, review: str, rating: int, date: datetime) -> None:
         """constructor method that sets variables and will do data checking
 
         Args:
@@ -34,6 +35,8 @@ class Review:
         self.instructor = instructor
         self.content = review
         self.rating = rating 
+        self.date = date
+
 
     def to_dict(self) -> dict:
         """Method to transform the review into a dictionary for json purposes
