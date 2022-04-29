@@ -38,10 +38,39 @@ class ReviewCollection:
         return dict_reviews
 
     def get_review_by_course(self, course: str) -> list:
+        """Get a list of reviews for a single course
 
+        Args:
+            course (str): the course the reviews are for
+
+        Returns:
+            list: all the reviews in the database for that course
+        """
+
+        # using .lower() so that the searched are case insensitive
+        # using 'in' so that acit1515 results in acit 1515 reviews. aka, less sensitive searching
         course_reviews = [
             rev for rev in self.reviews 
-            if rev.course.lower() == course.lower()
+            if course.lower() in rev.course.lower() 
         ]
 
         return course_reviews
+    
+    def get_review_by_instr(self, instr: str) -> list:
+        """Get a list of reviews for a course taught by a specific instructor
+
+        Args:
+            instr (str): the instructor who teaches the courses you are searching for
+
+        Returns:
+            list: all the reviews in the database for that courses taught by that instructor
+        """
+
+        # using .lower() so that the searched are case insensitive
+        # using 'in' so that "johnny" results in reviews of any instructor named johnny, regardless of last name
+        instr_reviews = [
+            rev for rev in self.reviews 
+            if instr.lower() in rev.instructor.lower()
+        ]
+
+        return instr_reviews
