@@ -36,7 +36,8 @@ class Review:
         self.instructor = instructor
         self.content = review
         self.rating = rating 
-        self.date = datetime.strptime(date, '%m-%d-%Y')
+        # converts the string date that was passed in, into a date object of format 2022-04-22 00:00:00
+        self.date = datetime.datetime.strptime(date, '%m-%d-%Y')
 
 
     def to_dict(self) -> dict:
