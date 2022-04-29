@@ -3,6 +3,7 @@
 body {
 	background-color:#1FA8F4;
 	margin: 0px;
+	position: relative;
 }
 
 
@@ -33,7 +34,7 @@ p{
 	justify-content: space-between;
 	align-items:center;
 	background-color:#0921db;
-	height: 35px;
+	height: 50px;
 }
 
 .navbar{
@@ -43,7 +44,7 @@ p{
 	list-style-type:none;
 	font-size:20px;
 	font-weight:900;
-	height:px;
+	height:275px;
 	margin-right:7px;
 }
 
@@ -60,17 +61,16 @@ p{
 
 
 
-
 .backtoindex {
+	display: flex;
 	margin-right: auto;
 	font-size:20px;
 	font-weight:900;
 }
 
 .backtoindex>li{
-	display: inline;
-	flex-direction:row;
 	list-style-type: none;
+	margin-right: 25px;
 	font-weight:900;
 }
 .darkmode_switch{
@@ -94,101 +94,3 @@ a:hover, a:active, a:focus {
 }
 
 /*end of horizontal navbar*/
-
-
-/*Blog page*/
-
-/*vertical nav var*/
-.h2blog{
-	text-align: right;
-}
-
-
-.vnavCont{
-	width: 223px;
-	
-}
-.blogveticalnav{
-	display: flex;
-	width:222px;
-	height:800px;
-	background-color: #40E7B5;
-}
-.vnavtitle{
-	height: 25px;
-	margin-left:15px;
-	color:#000000;
-}
-
-.vnav_ul{
-	padding-top: 22px;
-	margin-left: -98px;
-	}
-
-.vnav_ul > li{
-	list-style-type: none;
-	color: #000000;
-	margin-top: 9px;
-}
-
-/*Blog contant space*/
-.bcontant{
-	display:flex;
-	flex-direction:row;
-	align-content: center;
-}
-
-.blog_text{
-	width: 850px;
-	margin-left: 35px;
-}
-.blog_text :first-child{
-	margin-top:0px;
-}
-
-/*end of Blog*/
-
-/* about me page*/
-.intropara_cont{
-	width:560px;
-	height:auto;
-	margin-left:35px;
-	
-	
-}
-.profilepic{
-	height:550px;
-	width:auto;
-}
-
-
-.intropara_cont :first-child{
-	margin-top:0px;
-}
-
-.flexcont{
-	display:flex;
-	align-content:center;
-	justify-content: center;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-
-
-/*cornor img style*/
-.cornorimg{
-	width:501 px;
-	height:501 px;
-	position: fixed;
-	right:0;
-	top:450px;
-	z-index:-1;
-}
-
-
-
-
-
-
-

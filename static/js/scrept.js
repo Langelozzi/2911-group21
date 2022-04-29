@@ -1,4 +1,4 @@
-const button = document.querySelector('.darkmode_switch');
+const button = document.querySelector('.form-check-input');
 button.addEventListener('click', modeswitch);
 var modeflag = 'light';
 
@@ -20,7 +20,7 @@ function lightmode() {
     document.querySelector('.horizonnav').style.backgroundColor = "#0921db";
     let alist = document.querySelectorAll('a');
     for (i = 0; i < alist.length; i++) {
-        alist[i].style.color = "#000000"
+        alist[i].style.color = "#FFFFFF"
     }
     modeflag = 'light';
 }
