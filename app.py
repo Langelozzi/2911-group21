@@ -19,6 +19,32 @@ def homepage():
     #Render the homepage html all the reviews in divs as plain text
     return render_template("home.html", reviews=reviews), 200
 
+#### for the sorting, we will have another endpoint that can display reviews based on search criteria ####
+# @app.route("/sorted", methods=["GET"])
+# def show_sorted():
+#     """Endpoint that renders an HTML page with reviews sorted by a search
+
+#     Args:
+#         search_criteria (str): the content from the search box
+
+#     Returns:
+#         html template or JSON : the html file or a message if an error occurs
+#     """
+
+#     try:
+#         search_option = request.form.get("search_dropdown")
+#         search_string = request.form['search_box']
+#         coll = ReviewCollection()
+        
+#         if search_option.lower() == 'course':
+#             sorted_reviews = coll.get_review_by_course(search_string)
+#         elif search_option.lower() == 'instructor':
+#             sorted_reviews = coll.get_review_by_instr(search_string)
+        
+#         return render_template("home.html", reviews=sorted_reviews), 200
+#     except:
+#         return jsonify({"Error": "Collection not found."}), 404
+
 #Return all the reviews as JSON
 @app.route("/api/reviews", methods=["GET"])
 def get_reviews():
