@@ -5,7 +5,8 @@
         "Course": "ACIT 2911",
         "Instructor": "Johnny Zhang",
         "Content": "This course is fantastic and having Johnny as an instructor made it even better.",
-        "Rating": 5
+        "Rating": 5,
+        "Date": "04-20-2022"
     },
     {
         "UserEmail": "mtang@my.bcit.ca",
@@ -13,7 +14,8 @@
         "Course": "ACIT 1620",
         "Instructor": "Alex Lau",
         "Content": "This course is quite challenging when you dont have much experience with web coding. I found that the instructor made it difficult for us to understand the JavaScript parts. Still passed though!",
-        "Rating": 2
+        "Rating": 2,
+        "Date": "04-12-2022"
     },
     {
         "UserEmail": "jbrooker@my.bcit.ca",
@@ -21,6 +23,7 @@
         "Course": "ACIT 2811",
         "Instructor": "Yves Rene Shema",
         "Content": "This course really allowed us to express our creativity and the teacher Yves made it so enjoyable!",
-        "Rating": 5
+        "Rating": 5,
+        "Date": "04-27-2022"
     }
 ]

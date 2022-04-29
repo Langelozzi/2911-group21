@@ -9,7 +9,7 @@ import datetime
 class Review:
     '''class to represent a review object'''
     
-    def __init__(self, user_email: str, title: str, course: str, instructor: str, review: str, rating: int, date: datetime) -> None:
+    def __init__(self, user_email: str, title: str, course: str, instructor: str, review: str, rating: int, date: str) -> None:
         """constructor method that sets variables and will do data checking
 
         Args:
@@ -19,6 +19,7 @@ class Review:
             instructor (str): who taught the course
             review (str): the content of the review. the details
             rating (int): a score out of 5
+            date (str): the date the review was written. format: MM-DD-YYYY
 
         Raises:
             ValueError: if the rating is not a number from 1-5
@@ -35,7 +36,8 @@ class Review:
         self.instructor = instructor
         self.content = review
         self.rating = rating 
-        self.date = date
+        # converts the string date that was passed in, into a date object of format 2022-04-22 00:00:00
+        self.date = datetime.datetime.strptime(date, '%m-%d-%Y')
 
 
     def to_dict(self) -> dict:
