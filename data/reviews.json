@@ -10,11 +10,11 @@
     },
     {
         "UserEmail": "mtang@my.bcit.ca",
-        "Title": "Not great to say the best!!!",
+        "Title": "It was alright",
         "Course": "ACIT 1620",
         "Instructor": "Alex Lau",
-        "Content": "This course is quite challenging when you dont have much experience with web coding. I found that the instructor made it difficult for us to understand the JavaScript parts. Still passed though!",
-        "Rating": 2,
+        "Content": "This course is quite challenging when you dont have much experience with web coding. Still passed though!",
+        "Rating": 3,
         "Date": "04-12-2022"
     },
     {
