@@ -34,13 +34,17 @@
     <div class="container" data-spy="scroll" data-target=".navbar" data-offset="50">
         {% for item in reviews %}
         <div class="container-fluid">
-            <h1>{{item.title}}</h1>
-            <h3>{{item.course}}</h3>
-            <h6>{{item.instructor}}</h6>
-            <p>{{item.content}}</p>
-            <p>{{item.rating}}</p>
-            <p>{{item.user_email}}</p>
-            <p>{{item.date}}</p>
+            
+            <ul style="list-style-type:none;">
+                <li style="display: inline;float:right;"><p>rating {{item.rating}}</p></li>
+                <li><h1>{{item.title}}</h1></li>
+                <li><h3>{{item.course}}</h3></li>
+                <li><h6>{{item.instructor}}</h6></li>
+                <li style="padding-left:15px;"><p>{{item.user_email}}</p></li>
+                <li style="padding-left:15px;"><p>{{item.date}}</p></li>
+            </ul>
+            
+            
         </div>
         {% endfor %}
     </div>
