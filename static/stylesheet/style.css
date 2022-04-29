@@ -1,0 +1,194 @@
+/*General layouts*/
+
+body {
+	background-color:#1FA8F4;
+	margin: 0px;
+}
+
+
+ul, ol, dl { 
+	color: #FFFFFF;
+	
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0;	 
+	padding-right: 15px;
+	padding-left: 15px; 
+	color: #FFFFFF;
+	font-family: 'Open Sans', sans-serif;
+}
+
+
+p{
+	font-family: 'Scope One', serif;
+	color: #FFFFFF;
+	
+}
+ 
+
+/*General layouts for horizontal Nav Bar section*/
+.horizonnav{
+	display:flex;
+	justify-content: space-between;
+	align-items:center;
+	background-color:#0921db;
+	height: 35px;
+}
+
+.navbar{
+	display:flex;
+	margin-left:auto;
+	flex-direction:row;
+	list-style-type:none;
+	font-size:20px;
+	font-weight:900;
+	height:px;
+	margin-right:7px;
+}
+
+
+
+.navbar > li {
+	display:inline;
+	margin-left:17px;
+}
+
+.navbar > li:hover, .navbar > li:active, .navbar > li:focus { 
+	background-color:#cbe314;
+}
+
+
+
+
+.backtoindex {
+	margin-right: auto;
+	font-size:20px;
+	font-weight:900;
+}
+
+.backtoindex>li{
+	display: inline;
+	flex-direction:row;
+	list-style-type: none;
+	font-weight:900;
+}
+.darkmode_switch{
+	border:none;
+	text-align: center;
+	padding-left: 3px;
+}
+
+a:link {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+a:visited {
+	color: #FFFFFF;
+	text-decoration: underline;
+
+}
+a:hover, a:active, a:focus {
+    color: #FFFFFF;
+}
+
+/*end of horizontal navbar*/
+
+
+/*Blog page*/
+
+/*vertical nav var*/
+.h2blog{
+	text-align: right;
+}
+
+
+.vnavCont{
+	width: 223px;
+	
+}
+.blogveticalnav{
+	display: flex;
+	width:222px;
+	height:800px;
+	background-color: #40E7B5;
+}
+.vnavtitle{
+	height: 25px;
+	margin-left:15px;
+	color:#000000;
+}
+
+.vnav_ul{
+	padding-top: 22px;
+	margin-left: -98px;
+	}
+
+.vnav_ul > li{
+	list-style-type: none;
+	color: #000000;
+	margin-top: 9px;
+}
+
+/*Blog contant space*/
+.bcontant{
+	display:flex;
+	flex-direction:row;
+	align-content: center;
+}
+
+.blog_text{
+	width: 850px;
+	margin-left: 35px;
+}
+.blog_text :first-child{
+	margin-top:0px;
+}
+
+/*end of Blog*/
+
+/* about me page*/
+.intropara_cont{
+	width:560px;
+	height:auto;
+	margin-left:35px;
+	
+	
+}
+.profilepic{
+	height:550px;
+	width:auto;
+}
+
+
+.intropara_cont :first-child{
+	margin-top:0px;
+}
+
+.flexcont{
+	display:flex;
+	align-content:center;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+/*cornor img style*/
+.cornorimg{
+	width:501 px;
+	height:501 px;
+	position: fixed;
+	right:0;
+	top:450px;
+	z-index:-1;
+}
+
+
+
+
+
+
+
