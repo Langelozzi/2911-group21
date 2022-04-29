@@ -50,13 +50,11 @@ p{
 
 
 
-.navbar > li {
+.login {
 	display:inline;
+	margin-top: 8px;
 	margin-left:17px;
-}
-
-.navbar > li:hover, .navbar > li:active, .navbar > li:focus { 
-	background-color:#cbe314;
+	height:35px;
 }
 
 
@@ -90,7 +88,36 @@ a:visited {
 
 }
 a:hover, a:active, a:focus {
-    color: #FFFFFF;
+    color: #40f44f;
 }
 
 /*end of horizontal navbar*/
+
+
+.container {
+	border: solid;
+	width: 2530px;
+	height: 650px;
+	overflow: scroll;
+	}
+.container-fluid{
+	border-bottom: solid;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+	}
+	
+	::-webkit-scrollbar-track {
+	border: 1px solid rgb(43, 0, 255);
+	border-radius: 10px;
+	}
+	
+	::-webkit-scrollbar-thumb {
+	border: 1px solid rgb(43, 0, 255);;
+	background: rgb(43, 0, 255);
+	border-radius: 10px;
+	}
+	
