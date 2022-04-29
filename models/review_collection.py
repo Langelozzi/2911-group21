@@ -36,3 +36,12 @@ class ReviewCollection:
         # list comprehension to create dictionaries from each Review object
         dict_reviews = [review.to_dict() for review in self.reviews]
         return dict_reviews
+
+    def get_review_by_course(self, course: str) -> list:
+
+        course_reviews = [
+            rev for rev in self.reviews 
+            if rev.course.lower() == course.lower()
+        ]
+
+        return course_reviews
