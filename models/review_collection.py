@@ -25,6 +25,9 @@ class ReviewCollection:
                 for rev in data
             ]
 
+            # calling the sort_by_date function to display the reviews in descending order by default (newest to oldest)
+            self.sort_by_date(self.reviews, rev=True)
+
     def get_reviews_as_dicts(self) -> list:
         """Converts all the Review objects to dictionaries and returns them
         as a list.
@@ -74,3 +77,21 @@ class ReviewCollection:
         ]
 
         return instr_reviews
+
+    def sort_by_date(self, lst: list, rev: bool) -> bool:
+        """Sorts a list of objects with a date attribute by their date.
+
+        Args:
+            lst (list): the list of objects to be sorted
+            rev (bool): whether or not to reverse the list. rev=False gives small to big. rev=True gives big to small
+
+        Returns:
+            bool: if the list was successfully sorted or not
+        """
+
+        try:
+            # sorting the list by the objects dates
+            lst.sort(key=lambda item: item.date, reverse=rev)
+            return True
+        except:
+            return False
