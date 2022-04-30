@@ -3,7 +3,8 @@
 '''A class to represent a single user'''
 
 class User:
-    def __init__(self, full_name: str, email: str, password: str) -> None:
+    def __init__(self, id: str, full_name: str, email: str, password: str) -> None:
+        self.public_id = id
         self.name = full_name
         self.email = email
         self.password = password
