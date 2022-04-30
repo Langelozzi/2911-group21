@@ -55,6 +55,18 @@ def get_reviews():
     #Convert to JSON
     return jsonify(reviews), 200
 
+
+#Change the list when an instructor is searched in the search bar(in the html)
+@app.route("/api/reviews/instructor", methods=["GET"])
+def get_reviews_by_instr():
+    try:
+        instructor = request.args.get("instructor")
+        collection = ReviewCollection()
+        reviews = collection.get_reviews_by_instr(instructor)
+        return jsonify(reviews), 200
+    except:
+        return jsonify({"Error": "Collection not found."}), 404
+
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":
