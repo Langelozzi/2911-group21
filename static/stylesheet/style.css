@@ -33,7 +33,7 @@ p{
 	display:flex;
 	justify-content: space-between;
 	align-items:center;
-	background-color:#0921db;
+	background-color:#FFFFFF;
 	height: 50px;
 }
 
@@ -78,12 +78,12 @@ p{
 }
 
 a:link {
-	color:#FFFFFF;
+	color:#000000;
 	text-decoration:none;
 }
 
 a:visited {
-	color: #FFFFFF;
+	color: #000000;
 	text-decoration: underline;
 
 }
