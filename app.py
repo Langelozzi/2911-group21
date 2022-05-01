@@ -55,6 +55,34 @@ def get_reviews():
     #Convert to JSON
     return jsonify(reviews), 200
 
+# filter reviews based on Instructor in order to get information about the instructors and their reviews when searched in the search bar(in the homepage)
+@app.route("/api/reviews/instructor/<instructor>", methods=["GET"])
+def get_reviews_by_instructor(instructor):
+    # Instantiate a review collection object
+    collection = ReviewCollection()
+    #Get all reviews
+    reviews = collection.get_reviews_as_dicts()
+    # filter reviews based on Instructor
+    filtered_reviews = [review for review in reviews if review["Instructor"] == instructor]
+    #Convert to JSON
+    return jsonify(filtered_reviews), 200
+
+
+    
+# filter reviews based on Course in order to get information about the courses and their reviews when searched in the search bar(in the homepage)
+@app.route("/api/reviews/course/<course>", methods=["GET"])
+def get_reviews_by_course(course):
+    # Instantiate a review collection object
+    collection = ReviewCollection()
+    #Get all reviews
+    reviews = collection.get_reviews_as_dicts()
+    # filter reviews based on Course
+    filtered_reviews = [review for review in reviews if review["Course"] == course]
+    #Convert to JSON
+    return jsonify(filtered_reviews), 200
+    
+
+
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":
