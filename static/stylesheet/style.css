@@ -7,19 +7,12 @@ body {
 }
 
 
-ul,
-ol,
-dl {
+ul,ol,dl {
 	color: #FFFFFF;
 
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
 	margin-top: 0;
 	padding-right: 15px;
 	padding-left: 15px;
@@ -101,27 +94,24 @@ a:focus {
 }
 
 /*end of horizontal navbar*/
+
 /*search bar*/
-.dropdown{
-	width: 148.17px;
+.dropdown {
+	width: 145px;
+	height: 30;
+	margin-right: 12px;
+	border-radius: 25px;
 }
 
-.searchbar{
+.searchbar {
 	display: flex;
 	flex-direction: row;
 	list-style-type: none;
 	margin-bottom: -30px;
 }
-.btn{
-	width:101px;
-	height:30px;
-	padding-top:1px;
-}
-.show{
-	width:115px;
-}
 
-.posting{
+/*end of search bar*/
+.posting {
 	border: solid;
 	border-radius: 25px;
 	width: 2530px;
