@@ -24,7 +24,6 @@ function lightmode() {
     for (i = 0; i < alist.length; i++) {
         alist[i].style.color = "#000000"
     }
-    document.querySelector('.btn').style.color ="#FFFFFF"
     modeflag = 'light';
 }
 

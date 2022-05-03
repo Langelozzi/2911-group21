@@ -34,15 +34,13 @@
     <div class="container">
             <ul class="searchbar">
                 <li>
-                    <div class="dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Sort By
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Instructor</a>
-                            <a class="dropdown-item" href="#">Course Number</a>
-                        </div>
-                    </div>
+                    <form>
+                        <select name="teams" class="dropdown">
+                            <option value="instructor"id="default">Sort By</option> 
+                            <option value="instructor" id="instructor">Instructor</option>
+                            <option value="courseN" id="courseN">Course Number</option>
+                        </select>
+                    </form>
                 </li>
                 
                 <li>
