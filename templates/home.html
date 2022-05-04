@@ -27,28 +27,27 @@
         </ul>
     </nav>
     <div class="jumbotron text-center">
-        <h1>Home</h1>
-        <p>I have no idea what i'm doing</p>
+        <br><h1>Home</h1><br>
     </div>
    
     <div class="container">
             <ul class="searchbar">
                 <li>
                     <form>
-                        <select name="teams" class="dropdown">
-                            <option value="instructor"id="default">Sort By</option> 
-                            <option value="instructor" id="instructor">Instructor</option>
-                            <option value="courseN" id="courseN">Course Number</option>
-                        </select>
                     </form>
                 </li>
                 
                 <li>
-                    <form action="#">    
-                        <input type="text" id="searchbar" name="search"><br><br>
+                    <form action="/" method="post">    
+                        <select name="teams" class="dropdown">
+                            <option value="default"id="default">Sort By</option> 
+                            <option value="instructor" id="instructor">Instructor</option>
+                            <option value="courseN" id="courseN">Course Number</option>
+                        </select>
+                        <input type="text" id="searchbar" name="search">
+                        <input type="submit" value="Submit" name="sorted"><br><br>
                     </form>
                 </li>
-                <li><input type="submit" value="Submit"></li>
             </ul>
         </div>
         <div class="container posting" data-spy="scroll" data-offset="50">
