@@ -7,6 +7,7 @@ from flask import Flask, render_template, request, jsonify
 from models.review import Review
 from models.user import User
 from models.review_collection import ReviewCollection
+import string
 
 # Creating the app object from flask
 app = Flask(__name__)
@@ -47,19 +48,48 @@ def get_reviews():
     #Convert to JSON
     return jsonify(reviews), 200
 
-def check_password(pwd: str) -> tuple:
+def check_password(pwd: str) -> dict:
     checks = {
-        "length": False,
-        "lower": False,
-        "upper": False,
-        ""
+        "length": "Password must be 8 or more characters in length",
+        "lower": "Password must contain at least one lowercase letter",
+        "upper": "Password must contain at least one uppercase letter",
+        "special": "Password must contain at least one special character"
     }
     
-    if len(pwd) < 8:
+    if len(pwd) > 7:
+        checks["length"] = True
+    
+    for char in pwd:
+        if char.islower():
+            checks["lower"] = True
+
+    for char in pwd:
+        if char.isupper():
+            checks["upper"] = True
+
+    if any(char in set(string.punctuation) for char in pwd):
+        checks["special"] = True
+
+    messages = [value for value in checks.values() if value != True]
+
+    return messages
 
 # Return the sign up page
 @app.route("/signup", methods=["GET", "POST"])
 def sign_up():
+    # if a post request is made to this enpoint. This happens when the form gets submitted
+    if request.method == "POST":
+        # extracting the values of the drop down options and the string in the search box
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        repeated_pass = request.form['password-repeat']
+        
+        # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
+        if request.form.get('submitbtn') == 'submit':
+            print(name, email, password, repeated_pass)
+            
+    
     return render_template("sign_up.html"), 200
 
 # starting app in debug mode if ran
