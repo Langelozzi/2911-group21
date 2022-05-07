@@ -1,0 +1,2 @@
+[run]
+Omit = test_*, models/user.py, app.py

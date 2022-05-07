@@ -47,6 +47,21 @@ def get_reviews():
     #Convert to JSON
     return jsonify(reviews), 200
 
+def check_password(pwd: str) -> tuple:
+    checks = {
+        "length": False,
+        "lower": False,
+        "upper": False,
+        ""
+    }
+    
+    if len(pwd) < 8:
+
+# Return the sign up page
+@app.route("/signup", methods=["GET", "POST"])
+def sign_up():
+    return render_template("sign_up.html"), 200
+
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":

@@ -13,7 +13,7 @@
 <body>
     <nav class="horizonnav">
         <ul class="backtoindex">
-            <li><img src="{{ url_for('static', filename='img/logo.png') }}" style=" margin-top:15px;" class="logoimg"></li>
+            <li><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" style=" margin-top:15px;" class="logoimg"></a></li>
         </ul>
 
         <ul class="navbar">
@@ -23,7 +23,8 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                 </div>
             </li>
-            <li class="login"><a href="#">Log in</a></li>
+            <li class="login"><a href="login">Log in</a></li>
+            <li style="padding-left: 1em;" class="signup"><a href="signup">Sign up</a></li>
         </ul>
     </nav>
     <div class="jumbotron text-center">
