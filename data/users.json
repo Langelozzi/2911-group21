@@ -4,17 +4,5 @@
         "Name": "John Doe",
         "Email": "jdoe@my.bcit.ca",
         "Password": "sha256$CiQDhqwJAnDBRHZQ$58df0d5fee3535d8d2600204c8c098bc14f1aaae44821152a8af3406627542a1"
-    },
-    {
-        "Id": "1",
-        "Name": "Lucas Angelozzi",
-        "Email": "langelozzi@gmail.com",
-        "Password": "apple"
-    },
-    {
-        "Id": "2",
-        "Name": "Jacob Angelozzi",
-        "Email": "jangel@gmail.com",
-        "Password": "cheese"
     }
 ]

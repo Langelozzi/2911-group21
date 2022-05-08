@@ -34,6 +34,14 @@
             <p>Please fill out the information to create an account</p>
             <hr>
 
+            <div class="msgs">
+                <ul>
+                    {% for msg in messages %}
+                    <li style="list-style: none; color: black;">{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
             <label for="name">Name</label>
             <input type="text" placeholder="Enter Full Name" name="name" required>
             

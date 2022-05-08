@@ -106,10 +106,10 @@ def sign_up():
 
         if password != repeated_pass:
             # will change these so that they show on the html page instead
-            return jsonify({"msg": "passwords do not match"})
+            return render_template("sign_up.html", messages=["Passwords do not match!"])
         if len(msgs) != 0:
             # will change these so that they show on the html page instead
-            return jsonify({"msg": f"{msgs}"})
+            return render_template("sign_up.html", messages=msgs)
         
         if request.form.get('submitbtn') == 'Sign up':
             print(name, email, password, repeated_pass)
@@ -121,6 +121,10 @@ def sign_up():
             
     
     return render_template("sign_up.html"), 200
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    return render_template("login.html"), 200
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
