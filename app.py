@@ -90,16 +90,18 @@ def check_password(pwd: str) -> dict:
 
     return messages
 
-# Return the sign up page
+# Sign up page
 @app.route("/signup", methods=["GET", "POST"])
 def sign_up():
     # if a post request is made to this enpoint. This happens when the form gets submitted
     if request.method == "POST":
-        # extracting the values of the drop down options and the string in the search box
+        # extracting the values of the sign up form
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
         repeated_pass = request.form['password-repeat']
+        
+        # checking the password
         msgs = check_password(password)
 
         if password != repeated_pass:
@@ -113,6 +115,7 @@ def sign_up():
             print(name, email, password, repeated_pass)
             hashed_pass = generate_password_hash(password, method='sha256')
             new_user = User(id=str(uuid.uuid4()), full_name=name, email=email, password=hashed_pass)
+            new_user.save()
         else:
             return jsonify({"success": "false"})
             

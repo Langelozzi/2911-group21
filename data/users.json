@@ -1,5 +1,11 @@
 [
     {
+        "Id": "5307a183-31f6-44c8-847c-4a1b3a257885",
+        "Name": "John Doe",
+        "Email": "jdoe@my.bcit.ca",
+        "Password": "sha256$CiQDhqwJAnDBRHZQ$58df0d5fee3535d8d2600204c8c098bc14f1aaae44821152a8af3406627542a1"
+    },
+    {
         "Id": "1",
         "Name": "Lucas Angelozzi",
         "Email": "langelozzi@gmail.com",
