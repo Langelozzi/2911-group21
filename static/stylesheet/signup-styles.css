@@ -27,7 +27,13 @@ hr {
 }
 
 /* Set a style for all buttons */
-button {
+
+input:hover {
+  opacity:1;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .submitbtn {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;
@@ -36,22 +42,14 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
-}
-
-button:hover {
-  opacity:1;
+  float: left;
+  width: 50%;
 }
 
 /* Extra styles for the cancel button */
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .submitbtn {
-  float: left;
-  width: 50%;
 }
 
 /* Add padding to container elements */
