@@ -3,7 +3,6 @@
 '''A class to represent a single user review for a course'''
 
 # Imports:
-from models.user import User
 import datetime
 
 class Review:
