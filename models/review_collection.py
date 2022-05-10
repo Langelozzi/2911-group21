@@ -97,3 +97,6 @@ class ReviewCollection:
             return True
         except:
             return False
+
+    def add_review(self, user, title: str, course: str, instructor: str, review: str, rating: int):
+        pass

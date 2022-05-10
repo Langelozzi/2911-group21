@@ -12,6 +12,11 @@ function darkmode() {
     for (i = 0; i < alist.length; i++) {
         alist[i].style.color = "#FFFFFF"
     }
+    let contSelect = document.querySelector(".container")
+    let lablelist = contSelect.querySelectorAll('label');
+    for (i = 0; i< lablelist.length;i++){
+        lablelist[i].style.color = "#FFFFFF"
+    }
     modeflag = 'dark';
 }
 
@@ -23,6 +28,11 @@ function lightmode() {
     let alist = document.querySelectorAll('a');
     for (i = 0; i < alist.length; i++) {
         alist[i].style.color = "#000000"
+    }
+    let contSelect = document.querySelector(".container")
+    let lablelist = contSelect.querySelectorAll('label');
+    for (i = 0; i< lablelist.length;i++){
+        lablelist[i].style.color = "#000000"
     }
     modeflag = 'light';
 }
