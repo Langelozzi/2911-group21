@@ -256,6 +256,29 @@ def user_homepage(current_user):
 
     return render_template("home_loggedin.html", reviews=reviews), 200
 
+#Create GET and POST flask endpoints for the create.html page
+#GET endpoint will render the create.html page
+#POST endpoint will call the add_review function from the ReviewCollection class
+@app.route("/create", methods=["GET", "POST"])
+def create():
+    if request.method == "POST":
+        course_number = request.form['course_number']
+        instructor = request.form['instructor']
+        course_name = request.form['course_name']
+        course_description = request.form['course_description']
+        course_rating = request.form['course_rating']
+
+        # creating a new review object
+        new_review = Review(id=str(uuid.uuid4()), course_number=course_number, instructor=instructor, course_name=course_name, course_description=course_description, course_rating=course_rating)
+        # adding the review to the collection
+        collection = ReviewCollection()
+        collection.add_review(new_review)
+        # returning the homepage
+        return redirect("/")
+    # render the create.html page
+    return render_template("create.html")
+
+
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
