@@ -112,15 +112,15 @@ def sign_up():
             return render_template("sign_up.html", messages=msgs)
         
         if request.form.get('submitbtn') == 'Sign up':
-            print(name, email, password, repeated_pass)
             hashed_pass = generate_password_hash(password, method='sha256')
             
             # if the email doesn't end in "@my.bcit.ca" then a valueerror is raised by the user class
             try:
                 new_user = User(id=str(uuid.uuid4()), full_name=name, email=email, password=hashed_pass)
                 new_user.save()
+                return render_template("sign_up.html", messages=["Account Successfully Created!", "Please Login"]), 200
             except ValueError:
-                return render_template("sign_up.html", messages=["Email must be a myBCIT email. (E.g. jsmith@my.bcit.ca)"])
+                return render_template("sign_up.html", messages=["INVALID EMAIL: Email must be a myBCIT email. (E.g. jsmith@my.bcit.ca)"])
         else:
             return jsonify({"success": "false"})
             
