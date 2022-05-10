@@ -1,2 +1,2 @@
 import pytest
-from models.review import Review
+from models.user import User
