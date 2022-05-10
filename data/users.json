@@ -1,5 +1,11 @@
 [
     {
+        "Id": "292ac022-05bd-4f88-8611-61e4445f0590",
+        "Name": "Joe Smith",
+        "Email": "jsmith@my.bcit.ca",
+        "Password": "sha256$nG29VtAYOHMILPmg$0c2adbddd23af3cf5569b29ad8e39dcd56760a143eef9c3c64ebdd23e369c21f"
+    },
+    {
         "Id": "8da671ab-fb7f-4cec-a6d4-7d4cb1d0c53e",
         "Name": "Lucas Angelozzi",
         "Email": "langelozzi@my.bcit.ca",

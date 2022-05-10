@@ -14,8 +14,11 @@ class User:
             id (str): the random generated uuid
             full_name (str): the first and last name of the user
             email (str): the users preferred email address
-            password (str): the users encrypted password
+            password (str): the users encrypted password 
         """
+
+        if email[-11:] != "@my.bcit.ca":
+            raise ValueError("Email must be a mybcit email")
         
         self.public_id = id
         self.name = full_name
