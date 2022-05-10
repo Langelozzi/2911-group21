@@ -3,53 +3,51 @@
 '''File containing endpoints for our Course Rating System application'''
 
 # Imports
-from flask import Flask, render_template, request, jsonify
+from functools import wraps
+from pyexpat.errors import messages
+from flask import Flask, render_template, request, jsonify, redirect, session
+from models.all_users import AllUsers
 from models.review import Review
 from models.user import User
 from models.review_collection import ReviewCollection
 import string
 import uuid
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
+import jwt
+import datetime
 
 # Creating the app object from flask
 app = Flask(__name__)
 
-#Create a flask endpoint that renders the html homepage
-@app.route("/", methods=["GET", "POST"])
-def homepage():
-    collection = ReviewCollection()
-    reviews = collection.reviews
-    
-    # if a post request is made to this enpoint. This happens when the form gets submitted
-    if request.method == "POST":
-        # extracting the values of the drop down options and the string in the search box
-        search_option = request.form.get("teams")
-        search_string = request.form['search']
+# creating a secret key for our authorization and authentication stuff
+app.config['SECRET_KEY'] = 'mobiusdesignssecretkey'
+
+# Creates a custom decorator for authorizing with the jwt
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        users = AllUsers()
+        token = None
+
+        print(request.headers)
+
+        if session['token']:
+            token = session['token']
+
+        if not token:
+            return redirect("http://127.0.0.1:5000/login")
         
-        # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
-        if request.form.get('sorted') == 'Submit':
-            # determining if the chosen sort option was instructor or course number based on the value of the dropdown option
-            if search_option.lower() == 'coursen':
-                # sorting the reviews and returning the homepage with the sorted reviews
-                sorted_reviews = collection.get_review_by_course(search_string)
-                return render_template("home.html", reviews=sorted_reviews), 200
-            elif search_option.lower() == 'instructor':
-                sorted_reviews = collection.get_review_by_instr(search_string)
-                return render_template("home.html", reviews=sorted_reviews), 200
+        try:
+            data = jwt.decode(token, app.config["SECRET_KEY"], ['HS256'])
+            current_user = users.get_user_by_id(data['public_id'])
+        except:
+            return jsonify({"Error": "Token is invalid"}), 401
 
-    #Render the homepage html all the reviews in divs as plain text
-    return render_template("home.html", reviews=reviews), 200
+        return f(current_user, *args, **kwargs)
+    
+    return decorated
 
-#Return all the reviews as JSON
-@app.route("/api/reviews", methods=["GET"])
-def get_reviews():
-    # Instantiate a review collection object
-    collection = ReviewCollection()
-    #Get all reviews
-    reviews = collection.get_reviews_as_dicts()
-    #Convert to JSON
-    return jsonify(reviews), 200
-
+# Function to help with the checking of a valid password for signing up
 def check_password(pwd: str) -> dict:
     """This function check a password for length, upper and lowercase letters and special characters
 
@@ -90,6 +88,43 @@ def check_password(pwd: str) -> dict:
 
     return messages
 
+#Create a flask endpoint that renders the html homepage
+@app.route("/", methods=["GET", "POST"])
+def homepage():
+    collection = ReviewCollection()
+    reviews = collection.reviews
+    
+    # if a post request is made to this enpoint. This happens when the form gets submitted
+    if request.method == "POST":
+        # extracting the values of the drop down options and the string in the search box
+        search_option = request.form.get("teams")
+        search_string = request.form['search']
+        
+        # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
+        if request.form.get('sorted') == 'Submit':
+            # determining if the chosen sort option was instructor or course number based on the value of the dropdown option
+            if search_option.lower() == 'coursen':
+                # sorting the reviews and returning the homepage with the sorted reviews
+                sorted_reviews = collection.get_review_by_course(search_string)
+                return render_template("home.html", reviews=sorted_reviews), 200
+            elif search_option.lower() == 'instructor':
+                sorted_reviews = collection.get_review_by_instr(search_string)
+                return render_template("home.html", reviews=sorted_reviews), 200
+
+    #Render the homepage html all the reviews in divs as plain text
+    return render_template("home.html", reviews=reviews), 200
+
+#Return all the reviews as JSON
+@app.route("/api/reviews", methods=["GET"])
+def get_reviews():
+    # Instantiate a review collection object
+    collection = ReviewCollection()
+    #Get all reviews
+    reviews = collection.get_reviews_as_dicts()
+    #Convert to JSON
+    return jsonify(reviews), 200
+
+
 # Sign up page
 @app.route("/signup", methods=["GET", "POST"])
 def sign_up():
@@ -127,6 +162,8 @@ def sign_up():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    users = AllUsers()
+    
     # if a post request is made to this enpoint. This happens when the form gets submitted
     if request.method == "POST":
         # extracting the values of the sign up form
@@ -134,12 +171,19 @@ def login():
         password = request.form['password']
         
         if request.form.get('submitbtn') == 'Log in':
-            hashed_pass = generate_password_hash(password, method='sha256')
-            
+            user = users.identify_user(email, password)
 
-    
+            if user:
+                token = jwt.encode({'public_id': user.public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config["SECRET_KEY"])
+                session['token'] = token
+                return jsonify({"token": token})#, redirect("http://127.0.0.1:5000/")
     
     return render_template("login.html"), 200
+
+@app.route("/protected", methods=["GET"])
+@token_required
+def protected(current_user):
+    return jsonify(current_user.to_dict())
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
