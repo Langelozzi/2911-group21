@@ -32,7 +32,13 @@ class User:
     #     else:
     #         return False
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
+        """Return the User information as a dictionary
+
+        Returns:
+            dict: the user info as a dict
+        """
+        
         return {
             "Id": self.public_id,
             "Name": self.name,
@@ -40,7 +46,10 @@ class User:
             "Password": self.password 
         }
 
-    def save(self):
+    def save(self) -> None:
+        """Saves the "self" user object into the user.json file
+        """
+        
         # create a list with the (new) user as the first item
         all_users = [self.to_dict()]
         
@@ -54,5 +63,14 @@ class User:
         with open("data/users.json", "w") as file:
             json.dump(all_users, file)
 
-    def get_reviews(self, collection: ReviewCollection):
+    def get_reviews(self, collection: ReviewCollection) -> list:
+        """Get all the reviews written by the user
+
+        Args:
+            collection (ReviewCollection): the collection of all the reviews
+
+        Returns:
+            list: a list of all the reviews written by that user
+        """
+        
         return [rev for rev in collection if self.email.lower() == rev.user_email]
