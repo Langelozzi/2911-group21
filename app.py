@@ -260,7 +260,8 @@ def user_homepage(current_user):
 #GET endpoint will render the create.html page
 #POST endpoint will call the add_review function from the ReviewCollection class
 @app.route("/create", methods=["GET", "POST"])
-def create():
+@token_required
+def create(current_user):
     if request.method == "POST":
         course_number = request.form['course_number']
         instructor = request.form['instructor']
@@ -268,13 +269,15 @@ def create():
         course_description = request.form['course_description']
         course_rating = request.form['course_rating']
 
+        user_email = current_user.email
+
         # creating a new review object
-        new_review = Review(id=str(uuid.uuid4()), course_number=course_number, instructor=instructor, course_name=course_name, course_description=course_description, course_rating=course_rating)
+        new_review = Review(user_email=user_email, course_number=course_number, instructor=instructor, course_name=course_name, course_description=course_description, course_rating=course_rating)
         # adding the review to the collection
         collection = ReviewCollection()
         collection.add_review(new_review)
         # returning the homepage
-        return redirect("/")
+        return redirect("http://127.0.0.1:5000/userhome")
     # render the create.html page
     return render_template("create.html")
 
