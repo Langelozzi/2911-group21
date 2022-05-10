@@ -5,6 +5,7 @@
 # Imports
 import json
 from models.review import Review
+from models.user import User
 
 
 class ReviewCollection:
@@ -97,3 +98,6 @@ class ReviewCollection:
             return True
         except:
             return False
+
+    def add_review(self, user: User, title: str, course: str, instructor: str, review: str, rating: int):
+        pass

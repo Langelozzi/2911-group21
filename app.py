@@ -7,6 +7,9 @@ from flask import Flask, render_template, request, jsonify
 from models.review import Review
 from models.user import User
 from models.review_collection import ReviewCollection
+import string
+import uuid
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Creating the app object from flask
 app = Flask(__name__)
@@ -46,6 +49,82 @@ def get_reviews():
     reviews = collection.get_reviews_as_dicts()
     #Convert to JSON
     return jsonify(reviews), 200
+
+def check_password(pwd: str) -> dict:
+    """This function check a password for length, upper and lowercase letters and special characters
+
+    Args:
+        pwd (str): the password being checked
+
+    Returns:
+        list: a list of messages if a condition is not satisfied
+    """
+    
+    checks = {
+        "length": "Password must be 8 or more characters in length",
+        "lower": "Password must contain at least one lowercase letter",
+        "upper": "Password must contain at least one uppercase letter",
+        "special": "Password must contain at least one special character"
+    }
+    
+    # checking length is 8 or more
+    if len(pwd) > 7:
+        checks["length"] = True
+    
+    # checking that it contains a lowercase letter 
+    for char in pwd:
+        if char.islower():
+            checks["lower"] = True
+
+    # checking that is contains an uppercase letter
+    for char in pwd:
+        if char.isupper():
+            checks["upper"] = True
+
+    # checking that it contains a special character
+    if any(char in set(string.punctuation) for char in pwd):
+        checks["special"] = True
+
+    # getting all messages that are left over
+    messages = [value for value in checks.values() if value != True]
+
+    return messages
+
+# Sign up page
+@app.route("/signup", methods=["GET", "POST"])
+def sign_up():
+    # if a post request is made to this enpoint. This happens when the form gets submitted
+    if request.method == "POST":
+        # extracting the values of the sign up form
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        repeated_pass = request.form['password-repeat']
+        
+        # checking the password
+        msgs = check_password(password)
+
+        if password != repeated_pass:
+            # will change these so that they show on the html page instead
+            return render_template("sign_up.html", messages=["Passwords do not match!"])
+        if len(msgs) != 0:
+            # will change these so that they show on the html page instead
+            return render_template("sign_up.html", messages=msgs)
+        
+        if request.form.get('submitbtn') == 'Sign up':
+            print(name, email, password, repeated_pass)
+            hashed_pass = generate_password_hash(password, method='sha256')
+            new_user = User(id=str(uuid.uuid4()), full_name=name, email=email, password=hashed_pass)
+            new_user.save()
+        else:
+            return jsonify({"success": "false"})
+            
+    
+    return render_template("sign_up.html"), 200
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    return render_template("login.html"), 200
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
