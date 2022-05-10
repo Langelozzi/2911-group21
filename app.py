@@ -213,6 +213,9 @@ def login():
 
                 # redirect to the user homepage
                 return redirect("http://127.0.0.1:5000/userhome")
+
+            else:
+                return render_template("login.html", messages=["User not found. Email or password may be incorrect."]), 404
     
     # when get method is sent to this endpoint
     return render_template("login.html"), 200
