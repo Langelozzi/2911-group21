@@ -22,7 +22,7 @@ app = Flask(__name__)
 # creating a secret key for our authorization and authentication stuff
 app.config['SECRET_KEY'] = 'mobiusdesignssecretkey'
 
-# Creates a custom decorator for authorizing with the jwt
+# Creates a custom decorator for authorizing with jwt
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -176,14 +176,36 @@ def login():
             if user:
                 token = jwt.encode({'public_id': user.public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config["SECRET_KEY"])
                 session['token'] = token
-                return jsonify({"token": token})#, redirect("http://127.0.0.1:5000/")
+
+                return redirect("http://127.0.0.1:5000/userhome")
     
     return render_template("login.html"), 200
 
-@app.route("/protected", methods=["GET"])
+@app.route("/userhome", methods=["GET", "POST"])
 @token_required
-def protected(current_user):
-    return jsonify(current_user.to_dict())
+def user_homepage(current_user):
+    collection = ReviewCollection()
+    reviews = collection.reviews
+    
+    # if a post request is made to this enpoint. This happens when the form gets submitted
+    if request.method == "POST":
+        # extracting the values of the drop down options and the string in the search box
+        search_option = request.form.get("teams")
+        search_string = request.form['search']
+        
+        # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
+        if request.form.get('sorted') == 'Submit':
+            # determining if the chosen sort option was instructor or course number based on the value of the dropdown option
+            if search_option.lower() == 'coursen':
+                # sorting the reviews and returning the homepage with the sorted reviews
+                sorted_reviews = collection.get_review_by_course(search_string)
+                return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+            elif search_option.lower() == 'instructor':
+                sorted_reviews = collection.get_review_by_instr(search_string)
+                return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+
+    #Render the homepage html all the reviews in divs as plain text
+    return render_template("home_loggedin.html", reviews=reviews), 200
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
