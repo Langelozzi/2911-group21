@@ -121,14 +121,24 @@ def sign_up():
                 return render_template("sign_up.html", messages=["Account Successfully Created!", "Please Login"]), 200
             except ValueError:
                 return render_template("sign_up.html", messages=["INVALID EMAIL: Email must be a myBCIT email. (E.g. jsmith@my.bcit.ca)"])
-        else:
-            return jsonify({"success": "false"})
             
     
     return render_template("sign_up.html"), 200
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # if a post request is made to this enpoint. This happens when the form gets submitted
+    if request.method == "POST":
+        # extracting the values of the sign up form
+        email = request.form['email']
+        password = request.form['password']
+        
+        if request.form.get('submitbtn') == 'Log in':
+            hashed_pass = generate_password_hash(password, method='sha256')
+            
+
+    
+    
     return render_template("login.html"), 200
 
 # starting app in debug mode if ran
