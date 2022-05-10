@@ -3,6 +3,7 @@
 '''A class to represent a single user'''
 
 import json
+from models.review_collection import ReviewCollection
 
 
 class User:
@@ -49,3 +50,6 @@ class User:
         # write the all_users list to the json file
         with open("data/users.json", "w") as file:
             json.dump(all_users, file)
+
+    def get_reviews(self, collection: ReviewCollection):
+        return [rev for rev in collection if self.email.lower() == rev.user_email]
