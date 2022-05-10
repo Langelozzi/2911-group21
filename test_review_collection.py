@@ -142,3 +142,13 @@ def test_sort_by_date(review_collection):
     sorted = review_collection.sort_by_date(review_collection, True)
 
     assert sorted == False
+
+def test_add_review(review_collection):
+    #add a review to the review collection and save that review to the json file
+    #take everything that is passed in, add to review object, then add to review collection list
+    pass
+
+def test_save_reviews(review_collection):
+    #will need mocking
+    #mock open json fill
+    pass
