@@ -29,20 +29,22 @@ def token_required(f):
         users = AllUsers()
         token = None
 
-        print(request.headers)
-
+        # if the session has a key of token (which happens after you login) then set token to the users token for the session
         if session['token']:
             token = session['token']
 
+        # if there is no token then redirect back to the login page
         if not token:
             return redirect("http://127.0.0.1:5000/login")
         
+        # if there is a token the decode it to verify it and then get the user by their public id attached to the token
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"], ['HS256'])
             current_user = users.get_user_by_id(data['public_id'])
         except:
             return jsonify({"Error": "Token is invalid"}), 401
 
+        # return the current user as first argument for all functions with this decorator
         return f(current_user, *args, **kwargs)
     
     return decorated
@@ -91,6 +93,12 @@ def check_password(pwd: str) -> dict:
 #Create a flask endpoint that renders the html homepage
 @app.route("/", methods=["GET", "POST"])
 def homepage():
+    """Endpoint that shows all the reviews and allows for sorting. Anyone can view this page
+
+    Returns:
+        html template: the html homepage
+    """
+    
     collection = ReviewCollection()
     reviews = collection.reviews
     
@@ -114,9 +122,16 @@ def homepage():
     #Render the homepage html all the reviews in divs as plain text
     return render_template("home.html", reviews=reviews), 200
 
+
 #Return all the reviews as JSON
 @app.route("/api/reviews", methods=["GET"])
 def get_reviews():
+    """API endpoint for getting all the reviews as JSON
+
+    Returns:
+        json: list of all reviews as json objects
+    """
+    
     # Instantiate a review collection object
     collection = ReviewCollection()
     #Get all reviews
@@ -128,6 +143,12 @@ def get_reviews():
 # Sign up page
 @app.route("/signup", methods=["GET", "POST"])
 def sign_up():
+    """Endpoint for signing up/creating an account with the CRS
+
+    Returns:
+        html template: the signup page html
+    """
+    
     # if a post request is made to this enpoint. This happens when the form gets submitted
     if request.method == "POST":
         # extracting the values of the sign up form
@@ -140,50 +161,76 @@ def sign_up():
         msgs = check_password(password)
 
         if password != repeated_pass:
-            # will change these so that they show on the html page instead
+            # display any error messages that occur
             return render_template("sign_up.html", messages=["Passwords do not match!"])
         if len(msgs) != 0:
-            # will change these so that they show on the html page instead
+            # display any error messages that occur
             return render_template("sign_up.html", messages=msgs)
         
+        # if the submit button is pressed then generate a hashed password and create a new user, then save them to the json file
         if request.form.get('submitbtn') == 'Sign up':
             hashed_pass = generate_password_hash(password, method='sha256')
             
             # if the email doesn't end in "@my.bcit.ca" then a valueerror is raised by the user class
             try:
+                # gives the new user a unique id using uuid module
                 new_user = User(id=str(uuid.uuid4()), full_name=name, email=email, password=hashed_pass)
                 new_user.save()
                 return render_template("sign_up.html", messages=["Account Successfully Created!", "Please Login"]), 200
             except ValueError:
                 return render_template("sign_up.html", messages=["INVALID EMAIL: Email must be a myBCIT email. (E.g. jsmith@my.bcit.ca)"])
-            
     
+    # if it is a get request then just return the html page
     return render_template("sign_up.html"), 200
 
+
+# Route for logging in
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """Endpoint for logging into your account
+
+    Returns:
+        redirect: once logged in, you are redirected to the user homepage
+    """
+    
     users = AllUsers()
     
     # if a post request is made to this enpoint. This happens when the form gets submitted
     if request.method == "POST":
-        # extracting the values of the sign up form
+        # extracting the values of the form
         email = request.form['email']
         password = request.form['password']
         
+        # if the login button is pressed then
         if request.form.get('submitbtn') == 'Log in':
+            # verify that the user is in the database and credentials are correct
             user = users.identify_user(email, password)
 
+            # if the user is correct then generate a token for them and add it to the session object
             if user:
                 token = jwt.encode({'public_id': user.public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config["SECRET_KEY"])
                 session['token'] = token
 
+                # redirect to the user homepage
                 return redirect("http://127.0.0.1:5000/userhome")
     
+    # when get method is sent to this endpoint
     return render_template("login.html"), 200
 
+
+# Route for the homepage of a logged in user, allows them to get access to the create method
 @app.route("/userhome", methods=["GET", "POST"])
 @token_required
 def user_homepage(current_user):
+    """Endpoint for the user homepage of the application. This displays options to create a new review and view account information
+
+    Args:
+        current_user (User): the user who is accessing the page
+
+    Returns:
+        html template: the html page for the user home
+    """
+    
     collection = ReviewCollection()
     reviews = collection.reviews
     
@@ -204,8 +251,8 @@ def user_homepage(current_user):
                 sorted_reviews = collection.get_review_by_instr(search_string)
                 return render_template("home_loggedin.html", reviews=sorted_reviews), 200
 
-    #Render the homepage html all the reviews in divs as plain text
     return render_template("home_loggedin.html", reviews=reviews), 200
+
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
