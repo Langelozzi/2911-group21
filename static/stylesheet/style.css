@@ -145,3 +145,11 @@ a:focus {
 	background: transparent;
 	margin-bottom: 12px;
 }
+
+#reveiw_contant{
+	padding:0px;
+	width: 1290px;
+	height: 200px;
+	resize: both;
+
+}
