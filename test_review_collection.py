@@ -144,8 +144,11 @@ def test_sort_by_date(review_collection):
     assert sorted == False
 
 def test_add_review(review_collection):
+    """This function tests if review has been added to the review collection list"""
     #add a review to the review collection and save that review to the json file
     #take everything that is passed in, add to review object, then add to review collection list
+    assert review_collection.review[0].user_email[-11:-1]== "@my.bcit.ca"
+
     pass
 
 def test_save_reviews(review_collection):
