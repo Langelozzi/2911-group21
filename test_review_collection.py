@@ -2,6 +2,7 @@ import email
 from xmlrpc.client import DateTime
 import pytest
 from models.review_collection import ReviewCollection
+from models.review import Review
 from unittest.mock import patch, mock_open
 import datetime
 from models.user import User

@@ -101,13 +101,13 @@ class ReviewCollection:
             return False
 
     def add_review(self, user, title: str, course: str, instructor: str, review: str, rating: int):
-        # user_email = user.email
-        # date = datetime.datetime.now()
+        user_email = user.email
+        date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
         
-        # try:
-        #     new_review = Review(user_email, title, course, instructor, review, rating, date)
-        #     self.reviews.append(new_review)
-        #     return new_review
-        # except:
-        #     return False
+        try:
+            new_review = Review(user_email, title, course, instructor, review, rating, date)
+            self.reviews.append(new_review)
+            return new_review
+        except ValueError:
+            return False
 
