@@ -1,7 +1,10 @@
+import email
+from xmlrpc.client import DateTime
 import pytest
 from models.review_collection import ReviewCollection
 from unittest.mock import patch, mock_open
 import datetime
+from models.user import User
 
 from test_review import review
 
@@ -142,3 +145,57 @@ def test_sort_by_date(review_collection):
     sorted = review_collection.sort_by_date(review_collection, True)
 
     assert sorted == False
+
+def test_add_review(review_collection):
+    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
+
+    new_review = review_collection.add_review(
+        user=lucas, 
+        title="This course is awesome haha!", 
+        course="ACIT 2811",
+        instructor="Yves Rene Shema",
+        review="This course is really cool, highly recommend",
+        rating=5
+    )
+
+    assert type(new_review) == Review
+    assert new_review in review_collection.reviews
+
+def test_add_review_contents(review_collection):
+    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
+
+    new_review = review_collection.add_review(
+        user=lucas, 
+        title="This course is awesome haha!", 
+        course="ACIT 2811",
+        instructor="Yves Rene Shema",
+        review="This course is really cool, highly recommend",
+        rating=5
+    )
+
+    assert new_review.user_email == "langelozzi@my.bcit.ca"
+    assert new_review.title == "This course is awesome haha!"
+    assert new_review.course == "ACIT 2811"
+    assert new_review.instructor == "Yves Rene Shema"
+    assert new_review.content == "This course is really cool, highly recommend"
+    assert new_review.rating == 5
+    assert type(new_review.date) == datetime.datetime
+
+def test_add_review_bad_review(review_collection):
+    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
+
+    new_review = review_collection.add_review(
+        user=lucas, 
+        title="This course is awesome haha!", 
+        course="ACIT 2811",
+        instructor="Yves Rene Shema",
+        review="This course is really cool, highly recommend",
+        rating=13 # a rating not in 1-5 should return a valueerror triggering the except block in the add_review function which returns False
+    )
+
+    assert new_review == False
+
+def test_save_reviews(review_collection):
+    #will need mocking
+    #mock open json fill
+    pass

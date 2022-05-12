@@ -8,7 +8,7 @@ from models.review_collection import ReviewCollection
 
 class User:
     def __init__(self, id: str, full_name: str, email: str, password: str) -> None:
-        """Constructor method for a user object
+        """Constructor method for a user object 
 
         Args:
             id (str): the random generated uuid
@@ -73,4 +73,4 @@ class User:
             list: a list of all the reviews written by that user
         """
         
-        return [rev for rev in collection if self.email.lower() == rev.user_email]
+        return [rev for rev in collection.reviews if self.email.lower() == rev.user_email]
