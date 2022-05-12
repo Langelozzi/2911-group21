@@ -1,7 +1,10 @@
+import email
+from xmlrpc.client import DateTime
 import pytest
 from models.review_collection import ReviewCollection
 from unittest.mock import patch, mock_open
 import datetime
+from models.user import User
 
 from test_review import review
 
@@ -146,10 +149,37 @@ def test_sort_by_date(review_collection):
 def test_add_review(review_collection):
     """This function tests if review has been added to the review collection list"""
     #add a review to the review collection and save that review to the json file
-    #take everything that is passed in, add to review object, then add to review collection list
-    assert review_collection.review[0].user_email[-11:-1]== "@my.bcit.ca"
+    #take everything that is passed in, add to review object, then add to review collection list    
+    review_collection = ReviewCollection()
 
+    title_add = review_collection.add_review(user = "fake@my.bcit",title="Good Course", course="ACIT 2911", instructor="Johnny Zhang",review="Johnny was lovely",rating=5)
+    assert title_add.user == "fake@my.bcit"
+    assert title_add.title == "Good Course"
+    assert title_add.course == "ACIT 2911"
+    assert title_add.instructor == "Johnny Zhang"
+    assert title_add.content == "Johnny was lovely"
+    assert title_add.rating == 5
+
+    assert type(review.date) == DateTime
+    
+    assert review in review_collection.reviews
     pass
+
+
+    # course_add = review_collection.add_review(course="ACIT 2911")
+    # assert review.course == "ACIT 2911"
+
+    # instructor_add = review_collection.add_review(instructor="Johnny Zhang")
+    # assert review.instructor == "Johnny Zhang"
+
+    # review_add = review_collection.add_review(review="Johnny was lovely")
+    # assert review.review == "Johnny was lovely"
+
+    # rating_add = review_collection.add_review(rating=5)
+    # assert review.rating == 5
+
+    
+
 
 def test_save_reviews(review_collection):
     #will need mocking
