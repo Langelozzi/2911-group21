@@ -1,2 +1,2 @@
 [run]
-Omit = test_*
+Omit = test_*, app.py

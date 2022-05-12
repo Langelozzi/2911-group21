@@ -99,17 +99,5 @@ class ReviewCollection:
         except:
             return False
 
-    def add_review(self, user: str, title: str, course: str, instructor: str, review: str, rating: int) -> bool | Review:
-        user = user
-        title = title
-        course = course
-        instructor = instructor
-        review = review
-        rating = rating
-        date = datetime.datetime.now()
-        try:   
-            new_review = Review(user, title, course, instructor, review, rating, date)
-            self.reviews.append(new_review)
-            return new_review
-        except:
-            return False
+    def add_review(self, user, title: str, course: str, instructor: str, review: str, rating: int):
+        pass

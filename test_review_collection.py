@@ -147,39 +147,53 @@ def test_sort_by_date(review_collection):
     assert sorted == False
 
 def test_add_review(review_collection):
-    """This function tests if review has been added to the review collection list"""
-    #add a review to the review collection and save that review to the json file
-    #take everything that is passed in, add to review object, then add to review collection list    
-    review_collection = ReviewCollection()
+    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
 
-    title_add = review_collection.add_review(user = "fake@my.bcit",title="Good Course", course="ACIT 2911", instructor="Johnny Zhang",review="Johnny was lovely",rating=5)
-    assert title_add.user == "fake@my.bcit"
-    assert title_add.title == "Good Course"
-    assert title_add.course == "ACIT 2911"
-    assert title_add.instructor == "Johnny Zhang"
-    assert title_add.content == "Johnny was lovely"
-    assert title_add.rating == 5
+    new_review = review_collection.add_review(
+        user=lucas, 
+        title="This course is awesome haha!", 
+        course="ACIT 2811",
+        instructor="Yves Rene Shema",
+        review="This course is really cool, highly recommend",
+        rating=5
+    )
 
-    assert type(review.date) == DateTime
-    
-    assert review in review_collection.reviews
-    pass
+    assert type(new_review) == Review
+    assert new_review in review_collection.reviews
 
+def test_add_review_contents(review_collection):
+    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
 
-    # course_add = review_collection.add_review(course="ACIT 2911")
-    # assert review.course == "ACIT 2911"
+    new_review = review_collection.add_review(
+        user=lucas, 
+        title="This course is awesome haha!", 
+        course="ACIT 2811",
+        instructor="Yves Rene Shema",
+        review="This course is really cool, highly recommend",
+        rating=5
+    )
 
-    # instructor_add = review_collection.add_review(instructor="Johnny Zhang")
-    # assert review.instructor == "Johnny Zhang"
+    assert new_review.user_email == "langelozzi@my.bcit.ca"
+    assert new_review.title == "This course is awesome haha!"
+    assert new_review.course == "ACIT 2811"
+    assert new_review.instructor == "Yves Rene Shema"
+    assert new_review.content == "This course is really cool, highly recommend"
+    assert new_review.rating == 5
+    assert type(new_review.date) == datetime.datetime
 
-    # review_add = review_collection.add_review(review="Johnny was lovely")
-    # assert review.review == "Johnny was lovely"
+def test_add_review_bad_review(review_collection):
+    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
 
-    # rating_add = review_collection.add_review(rating=5)
-    # assert review.rating == 5
+    new_review = review_collection.add_review(
+        user=lucas, 
+        title="This course is awesome haha!", 
+        course="ACIT 2811",
+        instructor="Yves Rene Shema",
+        review="This course is really cool, highly recommend",
+        rating=13 # a rating not in 1-5 should return a valueerror triggering the except block in the add_review function which returns False
+    )
 
-    
-
+    assert new_review == False
 
 def test_save_reviews(review_collection):
     #will need mocking
