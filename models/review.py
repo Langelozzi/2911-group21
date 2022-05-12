@@ -52,5 +52,6 @@ class Review:
             "Course": self.course,
             "Instructor": self.instructor,
             "Content": self.content,
-            "Rating": self.rating
+            "Rating": self.rating,
+            "Date": self.date.strftime('%m-%d-%Y %H:%M')
         }

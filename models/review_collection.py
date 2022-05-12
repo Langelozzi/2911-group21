@@ -101,13 +101,42 @@ class ReviewCollection:
             return False
 
     def add_review(self, user, title: str, course: str, instructor: str, review: str, rating: int):
+        """Add a review to the review collection
+
+        Args:
+            user (User): the user who is logged in at the time the review is created
+            title (str): the title of the review
+            course (str): the course the review is written for
+            instructor (str): the instructor who teaches the course
+            review (str): the content of the review
+            rating (int): the rating from 1-5 of the course
+
+        Returns:
+            Review | Bool: Either the newly created review or false if an error occurs
+        """
+        
         user_email = user.email
         date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
         
         try:
             new_review = Review(user_email, title, course, instructor, review, rating, date)
             self.reviews.append(new_review)
+            print(new_review)
+            print()
             return new_review
         except ValueError:
             return False
+
+    def save(self):
+        """Saves the reviews to the Json file
+        """
+        
+        reviews = [rev.to_dict() for rev in self.reviews]
+
+        for rev in reviews:
+            print(rev)
+        
+        # write the reviews list to the json file
+        with open("data/reviews.json", "w") as file:
+            json.dump(reviews, file)
 

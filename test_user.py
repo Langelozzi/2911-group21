@@ -85,8 +85,6 @@ def test_to_dict(user):
 
 
 def test_get_reviews(user, review_collection):
-
-
     correct_list = user.get_reviews(review_collection)
     assert "something@my.bcit.ca" not in [
         rev for rev in correct_list]

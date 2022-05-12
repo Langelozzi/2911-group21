@@ -269,22 +269,14 @@ def create(current_user):
         rating = request.form['Rating']
         review_content = request.form['review_content']
 
-
-        user_email = current_user.email
-
     #if the submit button is pressed then add the review to the collection
         if request.form.get('submitbtn') == 'save':
             collection = ReviewCollection()
-            collection.add_review(review_title, course_name, instructor, rating, review_content, user_email)
+            collection.add_review(current_user, review_title, course_name, instructor, review_content, int(rating))
+            collection.save()
             return redirect("http://127.0.0.1:5000/userhome")
-        # #creating a new review object
-        # new_review = Review(id=str(uuid.uuid4()), title=review_title, course_name=course_name, instructor=instructor, rating=rating, review_content=review_content, user_email=user_email)
-        # new_review.save()
-        # return redirect("http://127.0.0.1:5000/userhome")
+
     return render_template("create.html")
-
-
-
 
 
 # starting app in debug mode if ran
