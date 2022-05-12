@@ -270,7 +270,7 @@ def create(current_user):
         review_content = request.form['review_content']
 
     #if the submit button is pressed then add the review to the collection
-        if request.form.get('submitbtn') == 'save':
+        if request.form.get('submitbtn') == 'Save':
             collection = ReviewCollection()
             collection.add_review(current_user, review_title, course_name, instructor, review_content, int(rating))
             collection.save()

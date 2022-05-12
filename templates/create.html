@@ -31,8 +31,8 @@
     </nav>
     <div class="container">
         <form action="" method="post">
-            <h1>Create Review page</h1>
-            <p style="margin-left:16px;">write your course review here</p>
+            <h1>Create New Review</h1>
+            <p style="margin-left:16px;">Fill out the following information and click "Save" to submit your review</p>
             <hr>
 
             <div class="msgs">
@@ -44,21 +44,21 @@
             </div>
             
             <label for="title">Title</label>
-            <input id="review_title" type="text" placeholder="Reviw Title" name="Title" required></input>
+            <input id="review_title" type="text" placeholder="Review Title" name="Title" required></input>
             
-            <label for="course_name">Course name</label>
+            <label for="course_name">Course Name</label>
             <input id="course_name" type="text" placeholder="Course Name" name="Course" required></input>
             
             <label for="instructor">Instructor</label>
             <input id="instructor" type="text" placeholder="Course Instructor" name="Instructor" required></input>
 
-            <label for="rating">rating</label>
-            <input id="rating" type="text" placeholder="Course Rating (in number 1-5)" name="Rating" required></input>
+            <label for="rating">Rating</label>
+            <input id="rating" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
             
             <textarea id="review_content" name="review_content" ></textarea>
             <div class="clearfix">
                 <input onClick="window.location.href='http://127.0.0.1:5000/userhome'" type="button" value="Cancel" class="cancelbtn" name="cancelbtn"></input>
-                <input type="submit" value="save" class="submitbtn" name="submitbtn"></input>
+                <input type="submit" value="Save" class="submitbtn" name="submitbtn"></input>
             </div>
         </form>
     </div>
