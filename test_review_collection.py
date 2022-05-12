@@ -3,8 +3,6 @@ from models.review_collection import ReviewCollection
 from unittest.mock import patch, mock_open
 import datetime
 
-from test_review import review
-
 dummy_data = '''
     [
         {

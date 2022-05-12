@@ -73,4 +73,4 @@ class User:
             list: a list of all the reviews written by that user
         """
         
-        return [rev for rev in collection if self.email.lower() == rev.user_email]
+        return [rev for rev in collection.reviews if self.email.lower() == rev.user_email]
