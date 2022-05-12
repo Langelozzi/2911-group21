@@ -263,23 +263,27 @@ def user_homepage(current_user):
 @token_required
 def create(current_user):
     if request.method == "POST":
-        course_number = request.form['course_number']
-        instructor = request.form['instructor']
-        course_name = request.form['course_name']
-        course_description = request.form['course_description']
-        course_rating = request.form['course_rating']
+        review_title= request.form['Title']
+        course_name = request.form['Course']
+        instructor = request.form['Instructor']
+        rating = request.form['Rating']
+        review_content = request.form['review_content']
+
 
         user_email = current_user.email
 
-        # creating a new review object
-        new_review = Review(user_email=user_email, course_number=course_number, instructor=instructor, course_name=course_name, course_description=course_description, course_rating=course_rating)
-        # adding the review to the collection
-        collection = ReviewCollection()
-        collection.add_review(new_review)
-        # returning the homepage
-        return redirect("http://127.0.0.1:5000/userhome")
-    # render the create.html page
+    #if the submit button is pressed then add the review to the collection
+        if request.form.get('submitbtn') == 'save':
+            collection = ReviewCollection()
+            collection.add_review(review_title, course_name, instructor, rating, review_content, user_email)
+            return redirect("http://127.0.0.1:5000/userhome")
+        # #creating a new review object
+        # new_review = Review(id=str(uuid.uuid4()), title=review_title, course_name=course_name, instructor=instructor, rating=rating, review_content=review_content, user_email=user_email)
+        # new_review.save()
+        # return redirect("http://127.0.0.1:5000/userhome")
     return render_template("create.html")
+
+
 
 
 
