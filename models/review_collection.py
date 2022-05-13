@@ -121,8 +121,6 @@ class ReviewCollection:
         try:
             new_review = Review(user_email, title, course, instructor, review, rating, date)
             self.reviews.append(new_review)
-            print(new_review)
-            print()
             return new_review
         except ValueError:
             return False
@@ -132,9 +130,6 @@ class ReviewCollection:
         """
         
         reviews = [rev.to_dict() for rev in self.reviews]
-
-        for rev in reviews:
-            print(rev)
         
         # write the reviews list to the json file
         with open("data/reviews.json", "w") as file:
