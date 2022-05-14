@@ -4,6 +4,7 @@
 
 # Imports
 import json
+import uuid
 from xmlrpc.client import DateTime
 from models.review import Review
 import datetime
@@ -115,11 +116,12 @@ class ReviewCollection:
             Review | Bool: Either the newly created review or false if an error occurs
         """
         
+        id = str(uuid.uuid4())
         user_email = user.email
         date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
         
         try:
-            new_review = Review(user_email, title, course, instructor, review, rating, date)
+            new_review = Review(id, user_email, title, course, instructor, review, rating, date)
             self.reviews.append(new_review)
             return new_review
         except ValueError:
