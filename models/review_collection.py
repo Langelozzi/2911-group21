@@ -25,7 +25,7 @@ class ReviewCollection:
             # attribute with list of all reviews
             self.reviews = [
                 # list comprehension to create Review objects from each json data entry
-                Review(rev["UserEmail"], rev["Title"], rev["Course"],
+                Review(rev["Id"], rev["UserEmail"], rev["Title"], rev["Course"],
                        rev["Instructor"], rev["Content"], rev["Rating"], rev["Date"])
                 for rev in data
             ]
@@ -101,7 +101,7 @@ class ReviewCollection:
         except:
             return False
 
-    def add_review(self, user, title: str, course: str, instructor: str, review: str, rating: int):
+    def add_review(self, id: str, user, title: str, course: str, instructor: str, review: str, rating: int):
         """Add a review to the review collection
 
         Args:

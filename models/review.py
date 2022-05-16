@@ -47,7 +47,7 @@ class Review:
         """
         
         return {
-            "ID": self.id,
+            "Id": self.id,
             "UserEmail": self.user_email,
             "Title": self.title,
             "Course": self.course,
