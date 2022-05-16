@@ -6,6 +6,7 @@ import datetime
 @pytest.fixture
 def review():
     return Review(
+        "bd071262-eeea-4c78-955b-66aaaaf57908",
         "jsmith@my.bcit.ca",
         "Loved this course!!!",
         "ACIT 2911",
@@ -18,7 +19,7 @@ def review():
 
 def test_bad_review():
     with pytest.raises(ValueError):
-        bad_review = Review("", "", "", "", "", 6, "")
+        bad_review = Review("", "", "", "", "", "", 6, "")
 
 
 def test_good_review(review):
@@ -37,12 +38,14 @@ def test_date(review):
 
 def test_to_dict(review):
     review_dict = {
+        "Id": "bd071262-eeea-4c78-955b-66aaaaf57908",
         "UserEmail": "jsmith@my.bcit.ca",
         "Title": "Loved this course!!!",
         "Course": "ACIT 2911",
         "Instructor": "Johnny Zhang",
         "Content": "This course is fantastic!",
-        "Rating": 5
+        "Rating": 5,
+        "Date": "04-20-2022 18:00"
     }
     assert review.to_dict() == review_dict
 

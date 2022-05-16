@@ -7,8 +7,9 @@ from unittest.mock import patch, mock_open
 
 
 dummy_data = '''
-    [
+[
         {
+            "Id": "1feeab52-29c3-45ce-a396-73c15f9da36f",
             "UserEmail": "jsmith@my.bcit.ca",
             "Title": "Loved this course!!!",
             "Course": "ACIT 2911",
@@ -18,6 +19,7 @@ dummy_data = '''
             "Date": "04-20-2022 18:00"
         },
         {
+            "Id": "f6f75a63-8dfe-414f-a75f-4d54c4732ea6",
             "UserEmail": "mtang@my.bcit.ca",
             "Title": "It was alright",
             "Course": "ACIT 1620",
@@ -27,6 +29,7 @@ dummy_data = '''
             "Date": "04-12-2022 10:30"
         },
         {
+            "Id": "bd071262-eeea-4c78-955b-66aaaaf57908",
             "UserEmail": "jbrooker@my.bcit.ca",
             "Title": "Super fun course!",
             "Course": "ACIT 2811",
