@@ -8,7 +8,7 @@ import datetime
 class Review:
     '''class to represent a review object'''
     
-    def __init__(self, user_email: str, title: str, course: str, instructor: str, review: str, rating: int, date: str) -> None:
+    def __init__(self, id: str, user_email: str, title: str, course: str, instructor: str, review: str, rating: int, date: str) -> None:
         """constructor method that sets variables and will do data checking
 
         Args:
@@ -28,7 +28,7 @@ class Review:
         if rating not in (1,2,3,4,5):
             raise ValueError
         # will add more checks in later sprints^
-        
+        self.id = id
         self.user_email = user_email
         self.title = title
         self.course = course
@@ -47,6 +47,7 @@ class Review:
         """
         
         return {
+            "ID": self.id,
             "UserEmail": self.user_email,
             "Title": self.title,
             "Course": self.course,
