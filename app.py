@@ -282,4 +282,4 @@ def create(current_user):
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=False, port=5000, host='0.0.0.0')
