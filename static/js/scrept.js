@@ -3,6 +3,21 @@ button.addEventListener('click', modeswitch);
 var modeflag = 'light';
 
 
+
+
+function id_set(){
+    const reviewpost = document.querySelector('.posting')
+    var review_post = reviewpost.querySelectorAll('.container-fluid')
+    for(i=0; i< review_post.length; i++){
+        review_post[i].setAttribute('id', i)
+    }
+}
+
+
+window.onload = id_set;
+
+
+
 function darkmode() {
     button.removeEventListener('click', darkmode);
     document.querySelector('body').style.backgroundColor = "#0E0E0E";
@@ -44,3 +59,4 @@ function modeswitch() {
         lightmode();
     }
 }
+
