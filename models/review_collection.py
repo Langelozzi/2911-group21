@@ -83,6 +83,11 @@ class ReviewCollection:
 
         return instr_reviews
 
+    def get_review_by_id(self, id):
+        correct = [rev for rev in self.reviews if rev.id == id][0]
+
+        return correct
+
     def sort_by_date(self, lst: list, rev: bool) -> bool:
         """Sorts a list of objects with a date attribute by their date.
 
