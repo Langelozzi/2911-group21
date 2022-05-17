@@ -84,7 +84,7 @@ class ReviewCollection:
         return instr_reviews
 
 
-    def get_review_by_id(self, id: str) -> Review | bool:
+    def get_review_by_id(self, id: str):
         """Retrieve a single review by its unique ID
 
         Args:
