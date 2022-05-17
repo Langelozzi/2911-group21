@@ -56,3 +56,29 @@ class Review:
             "Rating": self.rating,
             "Date": self.date.strftime('%m-%d-%Y %H:%M')
         }
+
+    def edit(self, title: str, course: str, instructor: str, content: str, rating: int):
+        """Method that alters title, course, instructor, content or rating of a review
+
+        Args:
+            title (str): the title of the review
+            course (str): the course its written for
+            instructor (str): the person who teaches the course
+            content (str): the review content
+            rating (int): the rating out of 5
+
+        Raises:
+            ValueError: if the rating is not 1-5
+        """
+        
+        # checking that the rating is 1-5
+        if rating not in (1,2,3,4,5):
+            raise ValueError
+        
+        self.title = title
+        self.course = course
+        self.instructor = instructor
+        self.content = content
+        self.rating = rating
+        # sets time of review to the time and date that it was edited
+        self.date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
