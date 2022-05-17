@@ -4,6 +4,7 @@
 
 # Imports
 import json
+import uuid
 from xmlrpc.client import DateTime
 from models.review import Review
 import datetime
@@ -24,7 +25,7 @@ class ReviewCollection:
             # attribute with list of all reviews
             self.reviews = [
                 # list comprehension to create Review objects from each json data entry
-                Review(rev["UserEmail"], rev["Title"], rev["Course"],
+                Review(rev["Id"], rev["UserEmail"], rev["Title"], rev["Course"],
                        rev["Instructor"], rev["Content"], rev["Rating"], rev["Date"])
                 for rev in data
             ]
@@ -100,7 +101,7 @@ class ReviewCollection:
         except:
             return False
 
-    def add_review(self, user, title: str, course: str, instructor: str, review: str, rating: int):
+    def add_review(self, id: str, user, title: str, course: str, instructor: str, review: str, rating: int):
         """Add a review to the review collection
 
         Args:
@@ -115,11 +116,12 @@ class ReviewCollection:
             Review | Bool: Either the newly created review or false if an error occurs
         """
         
+        id = str(uuid.uuid4())
         user_email = user.email
         date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
         
         try:
-            new_review = Review(user_email, title, course, instructor, review, rating, date)
+            new_review = Review(id, user_email, title, course, instructor, review, rating, date)
             self.reviews.append(new_review)
             return new_review
         except ValueError:
