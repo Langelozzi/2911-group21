@@ -4,7 +4,6 @@ var modeflag = 'light';
 
 
 
-
 function id_set(){
     const reviewpost = document.querySelector('.posting')
     var review_post = reviewpost.querySelectorAll('.container-fluid')
