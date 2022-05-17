@@ -212,7 +212,7 @@ def login():
                 session['token'] = token
 
                 # redirect to the user homepage
-                return redirect("http://127.0.0.1:5000/userhome")
+                return redirect("/userhome")
 
             else:
                 return render_template("login.html", messages=["User not found. Email or password may be incorrect."]), 404
@@ -274,7 +274,7 @@ def create(current_user):
             collection = ReviewCollection()
             collection.add_review(current_user, review_title, course_name, instructor, review_content, int(rating))
             collection.save()
-            return redirect("http://127.0.0.1:5000/userhome")
+            return redirect("/userhome")
 
     return render_template("create.html")
 
@@ -282,4 +282,5 @@ def create(current_user):
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":
-    app.run(debug=True)
+    # removed debug in order to deploy using gunicorn server with heroku
+    app.run()

@@ -7,3 +7,10 @@ install:
 # command to run tests
 script:
   - pytest
+deploy:
+  providor: heroku
+  api_key:
+    secure: 1167531a-f8f8-4bc0-887b-b0456eb13500
+  app: bcit-crs
+  on:
+    repo: Langelozzi/2911-group21

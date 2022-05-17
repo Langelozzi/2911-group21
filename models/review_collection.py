@@ -83,6 +83,42 @@ class ReviewCollection:
 
         return instr_reviews
 
+
+    def get_review_by_id(self, id: str):
+        """Retrieve a single review by its unique ID
+
+        Args:
+            id (str): the unique uuid 
+
+        Returns:
+            Review | False: the review object that has matched the id or false if no object is found
+        """
+        try:
+            correct = [rev for rev in self.reviews if rev.id == id][0]
+            return correct
+        except:
+            return False
+
+    
+    def delete_review(self, id: str) -> bool:
+        """Delete a review from the collection
+
+        Args:
+            id (str): the unique id of the review you want to delete
+
+        Returns:
+            bool: if the review was successfully deleted or not
+        """
+        
+        review = self.get_review_by_id(id)
+        try:
+            self.reviews.remove(review)
+            return True
+        except:
+            # if the review could not be removed for some reason (most likely if the review is not in the list)
+            return False
+
+
     def sort_by_date(self, lst: list, rev: bool) -> bool:
         """Sorts a list of objects with a date attribute by their date.
 
