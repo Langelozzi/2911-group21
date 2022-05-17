@@ -282,4 +282,5 @@ def create(current_user):
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":
+    # removed debug in order to deploy using gunicorn server with heroku
     app.run()
