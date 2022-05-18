@@ -44,18 +44,18 @@
             </div>
             
             <label for="title">Title</label>
-            <input id="review_title" type="text" placeholder="Review Title" name="Title" required></input>
+            <input id="review_title" value="{{review.title}}" type="text" placeholder="Review Title" name="Title" required></input>
             
             <label for="course_name">Course Name</label>
-            <input id="course_name" type="text" placeholder="Course Name" name="Course" required></input>
+            <input id="course_name" value="{{review.course}}" type="text" placeholder="Course Name" name="Course" required></input>
             
             <label for="instructor">Instructor</label>
-            <input id="instructor" type="text" placeholder="Course Instructor" name="Instructor" required></input>
+            <input id="instructor" value="{{review.instructor}}" type="text" placeholder="Course Instructor" name="Instructor" required></input>
 
             <label for="rating">Rating</label>
-            <input id="rating" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
+            <input id="rating" value="{{review.rating}}" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
             
-            <textarea onload="editPost" id="review_content" name="review_content" ></textarea>
+            <textarea id="review_content" name="review_content" >{{review.content}}</textarea>
             <div class="clearfix">
                 <!--<input onClick="window.location.href='/userhome'" type="button" value="Cancel" class="cancelbtn" name="cancelbtn"></input>-->
                 <button id="save" type="button" class="btn btn-info">save edit</button>

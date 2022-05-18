@@ -239,6 +239,13 @@ def user_homepage(current_user):
     
     # if a post request is made to this enpoint. This happens when the form gets submitted
     if request.method == "POST":
+        # if edit button is clicked
+        if request.form.get('editbtn') == 'Edit':
+            review_id = request.form.get("review_id", "")
+            # correct_review = collection.get_review_by_id(review_id)
+            session["review_id"] = review_id
+            return redirect("/edit")
+        
         # extracting the values of the drop down options and the string in the search box
         search_option = request.form.get("teams")
         search_string = request.form['search']
@@ -253,6 +260,7 @@ def user_homepage(current_user):
             elif search_option.lower() == 'instructor':
                 sorted_reviews = collection.get_review_by_instr(search_string)
                 return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+
 
     return render_template("home_loggedin.html", reviews=reviews), 200
 
@@ -281,7 +289,12 @@ def create(current_user):
 @app.route("/edit", methods=["GET", "POST"])
 @token_required
 def edit(current_user):
-    return render_template("edit.html")
+    collection = ReviewCollection()
+
+    review_id = session["review_id"]
+    correct_review = collection.get_review_by_id(review_id)
+    
+    return render_template("edit.html", review=correct_review)
 
 
 # starting app in debug mode if ran
