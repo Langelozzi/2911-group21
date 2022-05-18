@@ -278,6 +278,11 @@ def create(current_user):
 
     return render_template("create.html")
 
+@app.route("/edit", methods=["GET", "POST"])
+@token_required
+def edit(current_user):
+    return render_template("edit.html")
+
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
