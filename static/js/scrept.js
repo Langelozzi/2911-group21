@@ -3,6 +3,7 @@ const button = document.querySelector('.form-check-input');
 button.addEventListener('click', modeswitch);
 var modeflag = 'light';
 
+
 var review_obj={
     /*rating*/0:"",
     /*title*/1:"",
@@ -12,7 +13,7 @@ var review_obj={
 };
 
 
-
+/*
 function editGet(){
     var text = [];
     
@@ -31,17 +32,25 @@ function editGet(){
     review_obj[i] = text[i]
     }
     review_obj[0] = review_obj[0].replace('rating ','')
+    console.log(review_obj)
 }
 
 function editPost(){
+    console.log(review_obj)
     var inputContainDiv = document.querySelector(".container")
     var inputfield =inputContainDiv.getElementsByTagName('input');
-    
+    var textarea = inputContainDiv.getElementsByTagName('textarea');
+    inputfield[0].value = review_obj[1]
+    inputfield[1].value = review_obj[2]
+    inputfield[2].value = review_obj[3]
+    inputfield[3].value = review_obj[0]
+    textarea.value = review_obj[4]
 
-
-
+    for (i = 0; i<5;i++){
+        review_obj[i] = ''
+    }
 }
-
+*/
 
 function darkmode() {
     button.removeEventListener('click', darkmode);
