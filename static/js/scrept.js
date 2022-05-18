@@ -1,20 +1,46 @@
+//import revJson from "/data/reviews.json" assert {type: 'json'};
 const button = document.querySelector('.form-check-input');
 button.addEventListener('click', modeswitch);
 var modeflag = 'light';
 
+var review_obj={
+    /*rating*/0:"",
+    /*title*/1:"",
+    /*course*/2:"",
+    /*instructor*/ 3:"",
+    /*contant*/ 4:"",
+};
 
 
-function id_set(){
-    const reviewpost = document.querySelector('.posting')
-    var review_post = reviewpost.querySelectorAll('.container-fluid')
-    for(i=0; i< review_post.length; i++){
-        review_post[i].setAttribute('id', i)
+
+function editGet(){
+    var text = [];
+    
+    
+    var entrypoint = document.getElementById('editButton')
+    var parent = entrypoint.parentElement.closest('div');
+    targetID = parent.id
+    let target = document.getElementById(targetID)
+    let lis = target.querySelectorAll("li")
+    for (i = 0; i<5;i++){
+        let li_subtags = lis[i].firstChild;
+        let sub_tag_text = li_subtags.textContent;
+        text.push(sub_tag_text);
     }
+    for (i = 0; i<5;i++){
+    review_obj[i] = text[i]
+    }
+    review_obj[0] = review_obj[0].replace('rating ','')
 }
 
+function editPost(){
+    var inputContainDiv = document.querySelector(".container")
+    var inputfield =inputContainDiv.getElementsByTagName('input');
+    
 
-window.onload = id_set;
 
+
+}
 
 
 function darkmode() {

@@ -53,7 +53,7 @@
         </div>
         <div class="container posting" data-spy="scroll" data-offset="50">
             {% for item in reviews %}
-            <div class="container-fluid">
+            <div id="{{item.id}}" class="container-fluid">
                 <ul style="list-style-type:none;">
                     <li style="display: inline;float:right;"><p>rating {{item.rating}}</p></li>
                     <li><h1>{{item.title}}</h1></li>
@@ -61,6 +61,8 @@
                     <li><h6>{{item.instructor}}</h6></li>
                     <li style="padding-left:15px;"><p>{{item.content}}</p></li>
                     <li style="padding-left:15px;"><p>{{item.date}}</p></li>
+                    <a href="edit"><button id="editButton" onclick="editGet()" type="button" class="btn btn-primary">edit</button></a>
+                    
                 </ul>
             </div>
             {% endfor %}

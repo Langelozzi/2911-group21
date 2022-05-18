@@ -53,7 +53,7 @@
         </div>
         <div class="container posting" data-spy="scroll" data-offset="50">
             {% for item in reviews %}
-            <div id="{item.Id}" class="container-fluid">
+            <div id="{{item.id}}" class="container-fluid">
                 <ul style="list-style-type:none;">
                     <li style="display: inline;float:right;"><p>rating {{item.rating}}</p></li>
                     <li><h1>{{item.title}}</h1></li>
