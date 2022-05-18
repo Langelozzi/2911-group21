@@ -280,9 +280,12 @@ def create(current_user):
     #if the submit button is pressed then add the review to the collection
         if request.form.get('submitbtn') == 'Save':
             collection = ReviewCollection()
-            collection.add_review(str(uuid.uuid4()), current_user, review_title, course_name, instructor, review_content, int(rating))
-            collection.save()
-            return redirect("/userhome")
+            added = collection.add_review(str(uuid.uuid4()), current_user, review_title, course_name, instructor, review_content, int(rating))
+            if added:
+                collection.save()
+                return redirect("/userhome")
+            elif not added:
+                return render_template("create.html", messages=["Invalid Review contents: Review either contains foul language or an invalid rating number"])
 
     return render_template("create.html")
 
@@ -328,4 +331,4 @@ def edit(current_user):
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":
     # removed debug in order to deploy using gunicorn server with heroku
-    app.run()
+    app.run(debug=True)
