@@ -280,7 +280,7 @@ def create(current_user):
     #if the submit button is pressed then add the review to the collection
         if request.form.get('submitbtn') == 'Save':
             collection = ReviewCollection()
-            collection.add_review(current_user, review_title, course_name, instructor, review_content, int(rating))
+            collection.add_review(str(uuid.uuid4()), current_user, review_title, course_name, instructor, review_content, int(rating))
             collection.save()
             return redirect("/userhome")
 
@@ -313,7 +313,13 @@ def edit(current_user):
             return redirect("/userhome")
         
         if request.form.get("deletebtn") == "Delete":
-            pass
+            deleted = collection.delete_review(review_id)
+            collection.save()
+
+            if deleted:
+                return redirect("/userhome")
+            if not deleted:
+                return render_template("edit.html", review=correct_review, messages=["Review not found, therefore not deleted."])
     
     return render_template("edit.html", review=correct_review)
 
