@@ -62,11 +62,12 @@
                     <li style="padding-left:15px;"><p>{{item.content}}</p></li>
                     <li style="padding-left:15px;"><p>{{item.date}}</p></li>
                     <!-- <a href="edit"><button id="editButton" onclick="editGet()" type="button" class="btn btn-primary">edit</button></a> -->
+                    {% if item.user_email == user.email %}
                     <form method="post">
                         <input type="submit" value="Edit" name="editbtn" class="btn btn-primary">
                         <input type="hidden" value="{{item.id}}" name="review_id">
                     </form>
-                    
+                    {% endif %}
                 </ul>
             </div>
             {% endfor %}

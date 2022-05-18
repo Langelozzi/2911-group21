@@ -262,7 +262,7 @@ def user_homepage(current_user):
                 return render_template("home_loggedin.html", reviews=sorted_reviews), 200
 
 
-    return render_template("home_loggedin.html", reviews=reviews), 200
+    return render_template("home_loggedin.html", reviews=reviews, user=current_user), 200
 
 #Create GET and POST flask endpoints for the create.html page
 #GET endpoint will render the create.html page
