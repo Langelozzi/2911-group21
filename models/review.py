@@ -81,4 +81,4 @@ class Review:
         self.content = content
         self.rating = rating
         # sets time of review to the time and date that it was edited
-        self.date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
+        self.date = datetime.datetime.now()

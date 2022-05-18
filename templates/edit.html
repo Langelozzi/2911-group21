@@ -30,7 +30,7 @@
         </ul>
     </nav>
     <div class="container">
-        <form action="" method="post">
+        <form method="post">
             <h1>Create New Review</h1>
             <p style="margin-left:16px;">Fill out the following information and click "Save" to submit your review</p>
             <hr>
@@ -56,11 +56,14 @@
             <input id="rating" value="{{review.rating}}" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
             
             <textarea id="review_content" name="review_content" >{{review.content}}</textarea>
-            <div class="clearfix">
+            <div style="margin-top: 1rem;" class="clearfix">
                 <!--<input onClick="window.location.href='/userhome'" type="button" value="Cancel" class="cancelbtn" name="cancelbtn"></input>-->
-                <button id="save" type="button" class="btn btn-info">save edit</button>
-                <button onClick="window.location.href='/userhome'" id="cancel" type="button" class="btn btn-warning">cancel</button>
-                <button type="button" class="btn btn-danger">delete </button>
+                <!-- <button id="save" type="button" class="btn btn-info">save edit</button> -->
+                <input type="submit" name="savebtn" value="Save" class="btn btn-success">
+                <!-- <button onClick="window.location.href='/userhome'" id="cancel" type="button" class="btn btn-secondary">cancel</button> -->
+                <input type="submit" name="cancelbtn" value="Cancel" class="btn btn-secondary">
+                <!-- <button type="button" class="btn btn-danger">delete </button> -->
+                <input type="submit" name="deletebtn" value="Delete" class="btn btn-danger">
             </div>
         </form>
     </div>

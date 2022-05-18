@@ -241,15 +241,15 @@ def user_homepage(current_user):
     if request.method == "POST":
         # if edit button is clicked
         if request.form.get('editbtn') == 'Edit':
+            # get the review id from the hidden input field value
             review_id = request.form.get("review_id", "")
-            # correct_review = collection.get_review_by_id(review_id)
+            # set the session object key to be the string of the id
             session["review_id"] = review_id
             return redirect("/edit")
         
         # extracting the values of the drop down options and the string in the search box
         search_option = request.form.get("teams")
         search_string = request.form['search']
-        
         # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
         if request.form.get('sorted') == 'Submit':
             # determining if the chosen sort option was instructor or course number based on the value of the dropdown option
@@ -262,7 +262,7 @@ def user_homepage(current_user):
                 return render_template("home_loggedin.html", reviews=sorted_reviews), 200
 
 
-    return render_template("home_loggedin.html", reviews=reviews), 200
+    return render_template("home_loggedin.html", reviews=reviews, user=current_user), 200
 
 #Create GET and POST flask endpoints for the create.html page
 #GET endpoint will render the create.html page
@@ -280,7 +280,7 @@ def create(current_user):
     #if the submit button is pressed then add the review to the collection
         if request.form.get('submitbtn') == 'Save':
             collection = ReviewCollection()
-            collection.add_review(current_user, review_title, course_name, instructor, review_content, int(rating))
+            collection.add_review(str(uuid.uuid4()), current_user, review_title, course_name, instructor, review_content, int(rating))
             collection.save()
             return redirect("/userhome")
 
@@ -293,6 +293,33 @@ def edit(current_user):
 
     review_id = session["review_id"]
     correct_review = collection.get_review_by_id(review_id)
+
+    if request.method == "POST":
+        if request.form.get("savebtn") == "Save":
+            review_title= request.form['Title']
+            course_name = request.form['Course']
+            instructor = request.form['Instructor']
+            rating = request.form['Rating']
+            review_content = request.form['review_content']
+            
+            review = collection.get_review_by_id(review_id)
+            review.edit(review_title, course_name, instructor, review_content, int(rating))
+            collection.save()
+
+            return redirect("/userhome")
+        
+        # if cancel button is pressed, redirect to user homepage
+        if request.form.get('cancelbtn') == "Cancel":
+            return redirect("/userhome")
+        
+        if request.form.get("deletebtn") == "Delete":
+            deleted = collection.delete_review(review_id)
+            collection.save()
+
+            if deleted:
+                return redirect("/userhome")
+            if not deleted:
+                return render_template("edit.html", review=correct_review, messages=["Review not found, therefore not deleted."])
     
     return render_template("edit.html", review=correct_review)
 
