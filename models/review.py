@@ -30,7 +30,11 @@ class Review:
             raise ValueError
 
         # bad word checking
-        bad_words = ["ass", "asshole", "dick", "dingus", "idiot", "cunt", "fuck", "shit", "nigger", "nigga", "bitch", "bastard", "retard", "wanker", "loser", "damn", "twat"]
+        bad_words = [
+            "ass", "asshole", "dick", "dingus", "idiot", "cunt", "fuck", 
+            "shit", "nigger", "nigga", "bitch", "bastard", "retard", "wanker", 
+            "loser", "damn", "twat"
+        ]
         all_words = f"{title} {course} {instructor} {review}"
         word_list = all_words.split()
 
