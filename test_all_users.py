@@ -1,10 +1,8 @@
-import email
 import pytest
 from models.all_users import AllUsers
 from models.user import User
 from models.review_collection import ReviewCollection
 from unittest.mock import patch, mock_open
-from werkzeug.security import generate_password_hash
 
 # "Howdy1234!"
 dummy_data = ''' [

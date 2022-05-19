@@ -1,4 +1,3 @@
-import email
 import pytest
 from models.user import User
 from models.review_collection import ReviewCollection

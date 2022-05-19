@@ -4,7 +4,6 @@
 
 # Imports
 from functools import wraps
-from pyexpat.errors import messages
 from flask import Flask, render_template, request, jsonify, redirect, session
 from models.all_users import AllUsers
 from models.review import Review
