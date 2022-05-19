@@ -52,3 +52,32 @@ def test_to_dict(review):
     # hello = review.to_dict()
 
     # assert hello["Title"] == "Loved this course!!!"
+
+
+def test_edit(review):
+    assert review.title == "Loved this course!!!"
+    assert review.course == "ACIT 2911"
+    assert review.instructor == "Johnny Zhang"
+    assert review.content == "This course is fantastic!"
+    assert review.rating == 5
+
+    review.edit("Love it!!", "ACIT 2000",
+                "Lucas Longanizelli", "Cest Magnifique", 4)
+
+    assert review.title == "Love it!!"
+    assert review.course == "ACIT 2000"
+    assert review.instructor == "Lucas Longanizelli"
+    assert review.content == "Cest Magnifique"
+    assert review.rating == 4
+
+
+def test_bad_edit(review):
+    with pytest.raises(ValueError):
+        review.edit("Love it!!", "ACIT 2000",
+                    "Lucas Longanizelli", "Cest Magnifique", 6)
+
+
+def test_bad_word():
+    with pytest.raises(ValueError):
+        review = Review("wufw20", "jsmith@my.bcit.ca", "twat",
+                        "ACIT 2911", "Bob", "bitch cunt", 4, "04-20-2022 18:00")

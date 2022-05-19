@@ -149,13 +149,15 @@ def test_sort_by_date(review_collection):
 
     assert sorted == False
 
+
 def test_add_review(review_collection):
-    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
+    lucas = User("abcd123", "Lucas Angelozzi",
+                 "langelozzi@my.bcit.ca", "P@ssw0rd")
 
     new_review = review_collection.add_review(
         id="62e6a2b4-427f-494d-aa70-b9b88f4a98b0",
-        user=lucas, 
-        title="This course is awesome haha!", 
+        user=lucas,
+        title="This course is awesome haha!",
         course="ACIT 2811",
         instructor="Yves Rene Shema",
         review="This course is really cool, highly recommend",
@@ -165,13 +167,15 @@ def test_add_review(review_collection):
     assert type(new_review) == Review
     assert new_review in review_collection.reviews
 
+
 def test_add_review_contents(review_collection):
-    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
+    lucas = User("abcd123", "Lucas Angelozzi",
+                 "langelozzi@my.bcit.ca", "P@ssw0rd")
 
     new_review = review_collection.add_review(
         id="62e6a2b4-427f-494d-aa70-b9b88f4a98b0",
-        user=lucas, 
-        title="This course is awesome haha!", 
+        user=lucas,
+        title="This course is awesome haha!",
         course="ACIT 2811",
         instructor="Yves Rene Shema",
         review="This course is really cool, highly recommend",
@@ -186,22 +190,59 @@ def test_add_review_contents(review_collection):
     assert new_review.rating == 5
     assert type(new_review.date) == datetime.datetime
 
+
 def test_add_review_bad_review(review_collection):
-    lucas = User("abcd123", "Lucas Angelozzi", "langelozzi@my.bcit.ca", "P@ssw0rd")
+    lucas = User("abcd123", "Lucas Angelozzi",
+                 "langelozzi@my.bcit.ca", "P@ssw0rd")
 
     new_review = review_collection.add_review(
         id="62e6a2b4-427f-494d-aa70-b9b88f4a98b0",
-        user=lucas, 
-        title="This course is awesome haha!", 
+        user=lucas,
+        title="This course is awesome haha!",
         course="ACIT 2811",
         instructor="Yves Rene Shema",
         review="This course is really cool, highly recommend",
-        rating=13 # a rating not in 1-5 should return a valueerror triggering the except block in the add_review function which returns False
+        rating=13  # a rating not in 1-5 should return a valueerror triggering the except block in the add_review function which returns False
     )
 
     assert new_review == False
 
+
 def test_save_reviews(review_collection):
-    #will need mocking
-    #mock open json fill
+    # will need mocking
+    # mock open json fill
     pass
+
+
+def test_get_review_by_id(review_collection):
+    review = review_collection.get_review_by_id(
+        "1feeab52-29c3-45ce-a396-73c15f9da36f")
+
+    assert review.title == "Loved this course!!!"
+    assert review.content == "This course is fantastic!"
+
+
+def test_bad_id(review_collection):
+    review = review_collection.get_review_by_id(
+        "1feeab52-29c3-456")
+    assert review == False
+
+
+def test_delete_review(review_collection):
+    assert "1feeab52-29c3-45ce-a396-73c15f9da36f" in [
+        rev.id for rev in review_collection.reviews]
+
+    review = review_collection.delete_review(
+        "1feeab52-29c3-45ce-a396-73c15f9da36f"
+    )
+    assert review == True
+    assert "1feeab52-29c3-45ce-a396-73c15f9da36f" not in [
+        rev.id for rev in review_collection.reviews]
+
+
+def test_no_review_delete(review_collection):
+
+    review = review_collection.delete_review(
+        "1feeab52-29c3-45ce-a396-73c15f9da36"
+    )
+    assert review == False
