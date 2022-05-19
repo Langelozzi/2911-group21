@@ -49,3 +49,11 @@ def test_to_dict(review):
     # hello = review.to_dict()
 
     # assert hello["Title"] == "Loved this course!!!"
+
+
+def test_edit_review(review):
+    pass
+
+
+def test_delete_review(review):
+    pass
