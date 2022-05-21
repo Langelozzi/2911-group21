@@ -325,7 +325,6 @@ def edit(current_user):
     
     return render_template("edit.html", review=correct_review)
 
-
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
 if __name__ == "__main__":

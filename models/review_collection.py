@@ -162,6 +162,21 @@ class ReviewCollection:
         except ValueError:
             return False
 
+    def get_course_average_rating(self, course: str) -> float:
+        """Find the average rating out of 5 for a course
+
+        Args:
+            course (str): the course for which you want the average of
+
+        Returns:
+            float: the average score out of 5
+        """
+        
+        ratings = [float(rev.rating) for rev in self.reviews if rev.course.lower() == course.lower()]
+        average = float(sum(ratings)/len(ratings))
+
+        return average
+
     def save(self):
         """Saves the reviews to the Json file
         """
