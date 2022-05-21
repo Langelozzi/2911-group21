@@ -162,7 +162,7 @@ class ReviewCollection:
         except ValueError:
             return False
 
-    def get_course_average_rating(self, course: str) -> float:
+    def get_average_rating(self, course: str) -> float:
         """Find the average rating out of 5 for a course
 
         Args:
@@ -176,6 +176,25 @@ class ReviewCollection:
         average = float(sum(ratings)/len(ratings))
 
         return average
+
+    def all_averages(self) -> dict:
+        """Create a dictionary of all the averages of courses that have reviews
+
+        Returns:
+            dict: all the courses (keys) and their averages (values)
+        """
+
+        # sets can only contain one instance so it will have all unique course numbers
+        courses = set()
+        for rev in self.reviews:
+            courses.add(rev.course)
+
+        # creating a dictionary of the course number with a value of their averages
+        avgs = dict()
+        for course in courses:
+            avgs[course] = self.get_average_rating(course)
+
+        return avgs
 
     def save(self):
         """Saves the reviews to the Json file
