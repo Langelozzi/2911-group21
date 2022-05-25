@@ -95,14 +95,19 @@ function modeswitch() {
     }
 }
 
-function deleteprompt() {   
-    
-    let text = "Are you sure you want to delete your review?\n Press Ok to continue";
-  if (confirm(text) == true) {
-    text = "You pressed OK!";
+function deleteprompt(page) {
+  let text = "Are you sure you want to delete your review?\nPress OK to continue";
+  let popup = confirm(text)
+  if (popup == true) {
+    location.href = "/delete";
   } else {
-    text = "You pressed Cancel!";
+    if (page == "edit") {
+      location.href = "/edit";
+    } else if (page == "home") {
+      location.href = "/userhome";
+    }
   }
-
-  document.getElementsByClassName("btn btn-danger" ).innerHTML = text;
+  //have to return because the button is in a form and when a form is submitted, it ignores any other requests
+  // such as changing pages
+  return false
 }
