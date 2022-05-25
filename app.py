@@ -245,6 +245,9 @@ def user_homepage(current_user):
             # set the session object key to be the string of the id
             session["review_id"] = review_id
             return redirect("/edit")
+
+        if request.form.get("deletebtn") == "Delete":
+          session["review_id"] = request.form.get("review_id", "")
         
         # extracting the values of the drop down options and the string in the search box
         search_option = request.form.get("teams")

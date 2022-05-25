@@ -102,7 +102,6 @@ function deleteprompt() {
     text = "You pressed OK!";
   } else {
     text = "You pressed Cancel!";
-    
   }
 
   document.getElementsByClassName("btn btn-danger" ).innerHTML = text;
