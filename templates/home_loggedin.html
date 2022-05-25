@@ -32,25 +32,18 @@
     </div>
    
     <div class="container">
-            <ul class="searchbar">
-                <li>
-                    <form>
-                    </form>
-                </li>
-                
-                <li>
-                    <form method="post">    
-                        <select name="teams" class="dropdown">
-                            <option value="default"id="default">Sort By</option> 
-                            <option value="instructor" id="instructor">Instructor</option>
-                            <option value="courseN" id="courseN">Course Number</option>
-                        </select>
-                        <input type="text" id="searchbar" name="search">
-                        <input type="submit" value="Submit" name="sorted"><br><br>
-                    </form>
-                </li>
-            </ul>
-        </div>
+      <div> 
+        <form method="post" class="searchbar">    
+          <select id="selectbox" name="teams" class="form-select">
+              <option value="default"id="default">Sort By</option> 
+              <option value="instructor" id="instructor">Instructor</option>
+              <option value="courseN" id="courseN">Course Number</option>
+          </select>
+          <input type="text" id="searchbar" class="form-control" name="search">
+          <input type="submit" value="Submit" class="btn btn-success" name="sorted"><br><br>
+        </form>
+      </div> 
+      </div>
         <div class="container posting" data-spy="scroll" data-offset="50">
             {% for item in reviews %}
             <div class="container-fluid">
