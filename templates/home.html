@@ -17,39 +17,27 @@
         </ul>
 
         <ul class="navbar">
-            <li>
-                <div class="form-check form-switch">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                </div>
-            </li>
-            <li class="averages"><a href="averages">Averages</a></li>
-            <li class="login"><a href="login">Log in</a></li>
-            <li style="padding-left: 1em;" class="signup"><a href="signup">Sign up</a></li>
+            <li class="nav-item"><a href="averages">Averages</a></li>
+            <li class="nav-item"><a href="login">Log in</a></li>
+            <li class="nav-item"><a href="signup">Sign up</a></li>
         </ul>
     </nav>
     <div class="jumbotron text-center">
         <br><h1 style="color:#FFFFFF">Home</h1><br>
     </div>
    
-    <div class="container">
-            <ul class="searchbar">
-                <li>
-                    <form>
-                    </form>
-                </li>
-                
-                <li>
-                    <form method="post">    
-                        <select name="teams" class="dropdown">
-                            <option value="default"id="default">Sort By</option> 
-                            <option value="instructor" id="instructor">Instructor</option>
-                            <option value="courseN" id="courseN">Course Number</option>
-                        </select>
-                        <input type="text" id="searchbar" name="search">
-                        <input type="submit" value="Submit" name="sorted"><br><br>
-                    </form>
-                </li>
-            </ul>
+      <div class="container">
+        <div> 
+          <form method="post" class="searchbar">    
+            <select id="selectbox" name="teams" class="form-select">
+                <option value="default"id="default">Sort By</option> 
+                <option value="instructor" id="instructor">Instructor</option>
+                <option value="courseN" id="courseN">Course Number</option>
+            </select>
+            <input type="text" id="searchbar" class="form-control" name="search">
+            <input type="submit" value="Submit" class="btn btn-success" name="sorted"><br><br>
+          </form>
+        </div> 
         </div>
         <div class="container posting" data-spy="scroll" data-offset="50" >
             {% for item in reviews %}
@@ -64,6 +52,7 @@
                 </ul>
             </div>
             {% endfor %}
+          </div>
         </div>
    
     <script src="{{url_for('static', filename='js/scrept.js')}}"></script>
