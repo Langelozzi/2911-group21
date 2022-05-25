@@ -13,7 +13,7 @@
 <body>
     <nav class="horizonnav">
         <ul class="backtoindex">
-            <li><a href="userhome"><img src="{{ url_for('static', filename='img/logo.png') }}" style=" margin-top:15px;" class="logoimg"></a></li>
+            <li><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" style=" margin-top:15px;" class="logoimg"></a></li>
         </ul>
 
         <ul class="navbar">
@@ -23,9 +23,8 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                 </div>
             </li>
-            <li class="averages"><a href="averages">Averages</a></li>
-            <li class="login"><a href="create">New</a></li>
-            <li style="padding-left: 1em;" class="signup"><a href="account">Account</a></li>
+            <li class="login"><a href="login">Log in</a></li>
+            <li style="padding-left: 1em;" class="signup"><a href="signup">Sign up</a></li>
         </ul>
     </nav>
     <div class="jumbotron text-center">
@@ -54,7 +53,7 @@
         </div>
         <div class="container posting" data-spy="scroll" data-offset="50">
             {% for item in reviews %}
-            <div class="container-fluid">
+            <div id="{{item.id}}" class="container-fluid">
                 <ul style="list-style-type:none;">
                     <li style="display: inline;float:right;"><p>rating {{item.rating}}</p></li>
                     <li><h1>{{item.title}}</h1></li>
@@ -62,18 +61,11 @@
                     <li><h6>{{item.instructor}}</h6></li>
                     <li style="padding-left:15px;"><p>{{item.content}}</p></li>
                     <li style="padding-left:15px;"><p>{{item.date}}</p></li>
-                    <!-- <a href="edit"><button id="editButton" onclick="editGet()" type="button" class="btn btn-primary">edit</button></a> -->
-                    {% if item.user_email == user.email %}
-                    <form method="post">
-                        <input type="submit" value="Edit" name="editbtn" class="btn btn-primary">
-                        <input type="submit" name="deletebtn" value="Delete" class="btn btn-danger">
-                        <input type="hidden" value="{{item.id}}" name="review_id">
-                    </form>
-                    {% endif %}
                 </ul>
             </div>
             {% endfor %}
         </div>
+   
     <script src="{{url_for('static', filename='js/scrept.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
