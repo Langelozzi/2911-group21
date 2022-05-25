@@ -255,10 +255,10 @@ def user_homepage(current_user):
             if search_option.lower() == 'coursen':
                 # sorting the reviews and returning the homepage with the sorted reviews
                 sorted_reviews = collection.get_review_by_course(search_string)
-                return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+                return render_template("home_loggedin.html", reviews=sorted_reviews, user=current_user), 200
             elif search_option.lower() == 'instructor':
                 sorted_reviews = collection.get_review_by_instr(search_string)
-                return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+                return render_template("home_loggedin.html", reviews=sorted_reviews, user=current_user), 200
 
 
     return render_template("home_loggedin.html", reviews=reviews, user=current_user), 200
@@ -331,6 +331,13 @@ def average_ratings():
     avgs = collection.all_averages()
 
     return render_template("averages.html", avgs=avgs)
+
+@app.route("/userhome/averages", methods=["GET"])
+def average_ratings_userhome():
+    collection = ReviewCollection()
+    avgs = collection.all_averages()
+
+    return render_template("averages_loggedin.html", avgs=avgs)
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
