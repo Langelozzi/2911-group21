@@ -33,7 +33,7 @@ p {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #FFFFFF;
+	background-color: #eeebeb;
 	height: 50px;
 }
 
@@ -44,10 +44,17 @@ p {
 	list-style-type: none;
 	font-size: 20px;
 	font-weight: 900;
-	margin-right: 7px;
+	margin-right: 10px;
 }
 
-
+.nav-item {
+  border: solid #000000 1px;
+  margin-right: 20px;
+  margin-top: -2px;
+  padding: 6px;
+  background-color: rgb(184, 183, 183);
+  border-radius: 4px;
+}
 
 .login {
 	margin-top: 8px;
@@ -90,7 +97,7 @@ a:visited {
 a:hover,
 a:active,
 a:focus {
-	color: #40f44f;
+	color: #1e559c;
 }
 
 /*end of horizontal navbar*/
@@ -108,7 +115,7 @@ a:focus {
   height: 4%;
 }
 
-.form-control {
+#searchbar {
   margin-left: 2%;
 }
 
@@ -123,7 +130,7 @@ a:focus {
 .posting {
 	border: solid;
 	border-radius: 25px;
-	background-color: #ffffff;
+	background-color: #eeebeb;
 	width: 2530px;
 	height: 650px;
 	overflow: scroll;
