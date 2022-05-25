@@ -1,14 +1,14 @@
 /*General layouts*/
 
 body {
-	background-color: #33789c;
+	background-color: #03376b;
 	margin: 0px;
 	position: relative;
 }
 
 
 ul,ol,dl {
-	color: #FFFFFF;
+	color: #000000;
 
 }
 
@@ -16,14 +16,14 @@ h1,h2,h3,h4,h5,h6 {
 	margin-top: 0;
 	padding-right: 15px;
 	padding-left: 15px;
-	color: #FFFFFF;
+	color: #000000;
 	font-family: 'Open Sans', sans-serif;
 }
 
 
 p {
 	font-family: 'Scope One', serif;
-	color: #FFFFFF;
+	color: #000000;
 
 }
 
@@ -114,6 +114,7 @@ a:focus {
 .posting {
 	border: solid;
 	border-radius: 25px;
+	background-color: #ffffff;
 	width: 2530px;
 	height: 650px;
 	overflow: scroll;

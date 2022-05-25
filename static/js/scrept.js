@@ -1,6 +1,6 @@
 //import revJson from "/data/reviews.json" assert {type: 'json'};
 const button = document.querySelector('.form-check-input');
-button.addEventListener('click', modeswitch);
+//button.addEventListener('click', modeswitch);
 var modeflag = 'light';
 
 
@@ -55,8 +55,9 @@ function editPost(){
 function darkmode() {
     button.removeEventListener('click', darkmode);
     document.querySelector('body').style.backgroundColor = "#0E0E0E";
-    document.querySelector('.horizonnav').style.backgroundColor = "#272120";
+    document.querySelector('.horizonnav').style.backgroundColor = "#2A2A2A";
     document.querySelector('.logoimg').setAttribute('src','../static/img/logoDM.png')
+    document.querySelector('.posting').style.backgroundColor = "#2A2A2A";
     let alist = document.querySelectorAll('a');
     for (i = 0; i < alist.length; i++) {
         alist[i].style.color = "#FFFFFF"
@@ -71,7 +72,7 @@ function darkmode() {
 
 function lightmode() {
     button.removeEventListener('click', lightmode);
-    document.querySelector('body').style.backgroundColor = "#33789c";
+    document.querySelector('body').style.backgroundColor = "#03376b";
     document.querySelector('.horizonnav').style.backgroundColor = "#FFFFFF";
     document.querySelector('.logoimg').setAttribute('src','../static/img/logo.png')
     let alist = document.querySelectorAll('a');

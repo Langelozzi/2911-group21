@@ -22,7 +22,6 @@
             <li>
                 <div class="form-check form-switch">
                     <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                 </div>
             </li>
             <li class="login"><a href="create">New</a></li>
@@ -31,8 +30,8 @@
     </nav>
     <div class="container">
         <form method="post">
-            <h1>Create New Review</h1>
-            <p style="margin-left:16px;">Fill out the following information and click "Save" to submit your review</p>
+            <h1 style="color:#FFFFFF;">Edit your Review</h1>
+            <p style="margin-left:16px;color:#FFFFFF;">Fill out the following information and click "Save" to submit your review</p>
             <hr>
 
             <div class="msgs">
@@ -43,16 +42,16 @@
                 </ul>
             </div>
             
-            <label for="title">Title</label>
+            <label for="title" style="color:#FFFFFF;">Title</label>
             <input id="review_title" value="{{review.title}}" type="text" placeholder="Review Title" name="Title" required></input>
             
-            <label for="course_name">Course Name</label>
+            <label for="course_name" style="color:#FFFFFF;">Course Name</label>
             <input id="course_name" value="{{review.course}}" type="text" placeholder="Course Name" name="Course" required></input>
             
-            <label for="instructor">Instructor</label>
+            <label for="instructor" style="color:#FFFFFF;">Instructor</label>
             <input id="instructor" value="{{review.instructor}}" type="text" placeholder="Course Instructor" name="Instructor" required></input>
 
-            <label for="rating">Rating</label>
+            <label for="rating" style="color:#FFFFFF;">Rating</label>
             <input id="rating" value="{{review.rating}}" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
             
             <textarea rows="10" cols="156" id="review_content" class="form-control" name="review_content" >{{review.content}}</textarea>
