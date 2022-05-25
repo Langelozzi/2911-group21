@@ -71,7 +71,7 @@ function darkmode() {
 
 function lightmode() {
     button.removeEventListener('click', lightmode);
-    document.querySelector('body').style.backgroundColor = "#1FA8F4";
+    document.querySelector('body').style.backgroundColor = "#33789c";
     document.querySelector('.horizonnav').style.backgroundColor = "#FFFFFF";
     document.querySelector('.logoimg').setAttribute('src','../static/img/logo.png')
     let alist = document.querySelectorAll('a');
