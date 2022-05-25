@@ -325,6 +325,12 @@ def edit(current_user):
     
     return render_template("edit.html", review=correct_review)
 
+@app.route("/averages", methods=["GET"])
+def average_ratings():
+    collection = ReviewCollection()
+    avgs = collection.all_averages()
+
+    return render_template("averages.html", avgs=avgs)
 
 # starting app in debug mode if ran
 # debug mode auto restarts the server after every change made to the code
