@@ -1,7 +1,7 @@
 /*General layouts*/
 
 body {
-	background-color: #1FA8F4;
+	background-color: #33789c;
 	margin: 0px;
 	position: relative;
 }
@@ -136,8 +136,8 @@ a:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-	border: 1px solid rgb(43, 0, 255);
-	background: rgb(43, 0, 255);
+	border: 1px solid rgb(64, 186, 223);
+	background: rgb(64, 186, 223);
 	border-radius: 25px;
 }
 
@@ -147,9 +147,5 @@ a:focus {
 }
 
 #review_content{
-	padding:0px;
-	width: 1290px;
-	height: 200px;
 	resize: both;
-
 }
