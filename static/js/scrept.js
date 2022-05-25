@@ -95,3 +95,15 @@ function modeswitch() {
     }
 }
 
+function deleteprompt() {   
+    
+    let text = "Are you sure you want to delete your review?\n Press Ok to continue";
+  if (confirm(text) == true) {
+    text = "You pressed OK!";
+  } else {
+    text = "You pressed Cancel!";
+    
+  }
+
+  document.getElementsByClassName("btn btn-danger" ).innerHTML = text;
+}

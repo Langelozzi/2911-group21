@@ -53,7 +53,7 @@
                     {% if item.user_email == user.email %}
                     <form method="post">
                         <input type="submit" value="Edit" name="editbtn" class="btn btn-primary">
-                        <input type="submit" name="deletebtn" value="Delete" class="btn btn-danger">
+                        <input type="submit" name="deletebtn" value="Delete" class="btn btn-danger" onclick="deleteprompt()">
                         <input type="hidden" value="{{item.id}}" name="review_id">
                     </form>
                     {% endif %}
