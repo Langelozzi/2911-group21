@@ -22,11 +22,26 @@ class Review:
 
         Raises:
             ValueError: if the rating is not a number from 1-5
+            ValueError: if the title, course, instructor name or review content contains a bad word
         """
         
         # checking that the rating is 1-5
         if rating not in (1,2,3,4,5):
             raise ValueError
+
+        # bad word checking
+        bad_words = [
+            "ass", "asshole", "dick", "dingus", "idiot", "cunt", "fuck", 
+            "shit", "nigger", "nigga", "bitch", "bastard", "retard", "wanker", 
+            "loser", "damn", "twat"
+        ]
+        all_words = f"{title} {course} {instructor} {review}"
+        word_list = all_words.split()
+
+        bad_in_all_words = [word for word in word_list if word.lower() in bad_words]
+        if len(bad_in_all_words) != 0:
+            raise ValueError
+        
         # will add more checks in later sprints^
         self.id = id
         self.user_email = user_email
@@ -81,4 +96,4 @@ class Review:
         self.content = content
         self.rating = rating
         # sets time of review to the time and date that it was edited
-        self.date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M')
+        self.date = datetime.datetime.now()
