@@ -262,7 +262,10 @@ def user_homepage(current_user):
                 return render_template("home_loggedin.html", reviews=sorted_reviews, user=current_user), 200
 
         if request.form.get("deletebtn") == "Delete":
-          session["review_id"] = request.form.get("review_id", "")
+            # get the review id from the hidden input field value
+            review_id = request.form.get("review_id", "")
+            # set the session object key to be the string of the id
+            session["review_id"] = review_id
 
     return render_template("home_loggedin.html", reviews=reviews, user=current_user), 200
 
