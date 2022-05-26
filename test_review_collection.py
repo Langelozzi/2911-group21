@@ -81,7 +81,7 @@ def test_values(review_collection):
 
 
 def test_review_by_course(review_collection):
-    """This functions tests the length of the list, and checks the review course 
+    """This functions tests the length of the list, and checks the review course
 
     Args:
         review_collection (ReviewCollection): a review collection object
@@ -244,3 +244,28 @@ def test_no_review_delete(review_collection):
         "1feeab52-29c3-45ce-a396-73c15f9da36"
     )
     assert review == False
+
+
+def test_get_average_rating(review_collection):
+    review_collection.add_review(
+        "idlol", User("haha", "sdfdlfkfd", "apple@my.bcit.ca", "cheese"), "lol", "ACIT 2911", "bob", "good", 4)
+
+    avg = review_collection.get_average_rating("ACIT 2911")
+    assert avg == float(4.5)
+
+
+def test_all_averages(review_collection):
+    # avgs = {
+    #     "ACIT 2911": 5,
+    #     "ACIT 1620": 3,
+    #     "ACIT 2811": 5
+    # }
+
+    all_avgs = review_collection.all_averages()
+
+    assert "ACIT 2911" in all_avgs.keys()
+    assert "ACIT 2811" in all_avgs.keys()
+    assert "ACIT 1620" in all_avgs.keys()
+
+    assert 5 in all_avgs.values()
+    assert 3 in all_avgs.values()
