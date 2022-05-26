@@ -25,6 +25,10 @@ class Review:
             ValueError: if the title, course, instructor name or review content contains a bad word
         """
         
+        # checking course number is valid
+        if not course[:4].isalpha():
+            raise ValueError
+
         # checking that the rating is 1-5
         if rating not in (1,2,3,4,5):
             raise ValueError
@@ -46,7 +50,12 @@ class Review:
         self.id = id
         self.user_email = user_email
         self.title = title
-        self.course = course
+
+        if " " in course:
+          self.course = f"{course[:4].upper()}{course[4:]}"
+        else:
+          self.course = f"{course[:4].upper()} {course[4:]}"
+        
         self.instructor = instructor
         self.content = review
         self.rating = rating 

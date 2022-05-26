@@ -10,7 +10,7 @@
     
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/signup-styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/style.css') }}">
-    <title>CRS Sign Up</title>
+    <title>CRS Create</title>
 </head>
 <body>
     <nav class="horizonnav">
@@ -19,41 +19,25 @@
         </ul>
 
         <ul class="navbar">
-            <li class="nav-item"><a href="averages">Averages</a></li>
-            <li class="nav-item"><a href="/login">Log in</a></li>
+            <li class="nav-item"><a href="login">Log in</a></li>
+            <li class="nav-item"><a href="signup">Sign up</a></li>
         </ul>
     </nav>
     <div class="container">
-        <form action="" method="post">
-            <h1 style="color: white;">Sign Up</h1>
-            <p style="color: white;">Please fill out the information to create an account</p>
-            <hr>
-
-            <div class="msgs">
-                <ul>
-                    {% for msg in messages %}
-                    <li style="list-style: none;"><h5 style="color: white;" class="text-center">{{ msg }}</h5></li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <label for="name">Name</label>
-            <input type="text" placeholder="Enter Full Name" name="name" required>
-            
-            <label for="email">Email</label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-            
-            <label for="password">Password</label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            
-            <label for="email">Repeat Password</label>
-            <input type="password" placeholder="Repeat Password" name="password-repeat" required>
-
-            <div class="clearfix">
-                <input onClick="window.location.href='/'" type="button" value="Cancel" class="cancelbtn" name="cancelbtn"></input>
-                <input type="submit" value="Sign up" class="submitbtn" name="submitbtn"></input>
-            </div>
-        </form>
+        <h1 style="color: white;" class="jumbotron text-center">Average Course Ratings</h1><br>
+        <table style="border-radius: 15px; overflow: hidden;" class="table table-striped table-light">
+            <caption style="color: white;">Average course ratings for courses that currently contain at least one review</caption>
+            <tr>
+                <th>Course</th>
+                <th>Average Rating</th>
+            </tr>
+            {% for course, avg in avgs.items() %}
+            <tr>
+                <td>{{ course }}</td>
+                <td>{{ avg }}</td>
+            </tr>
+            {% endfor %}
+        </table>        
     </div>
 
     <script src="{{url_for('static', filename='js/scrept.js')}}"></script>

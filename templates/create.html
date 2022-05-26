@@ -19,43 +19,38 @@
         </ul>
 
         <ul class="navbar">
-            <li>
-                <div class="form-check form-switch">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                </div>
-            </li>
-            <li class="login"><a href="create">New</a></li>
-            <li style="padding-left: 1em;" class="signup"><a href="account">Account</a></li>
+            <li class="nav-item"><a href="userhome/averages">Averages</a></li>
         </ul>
     </nav>
     <div class="container">
         <form action="" method="post">
-            <h1>Create New Review</h1>
-            <p style="margin-left:16px;">Fill out the following information and click "Save" to submit your review</p>
+            <h1 style="color:#FFFFFF;">Create New Review</h1>
+            <p style="margin-left:16px; color:#FFFFFF;">Fill out the following information and click "Save" to submit your review</p>
             <hr>
 
             <div class="msgs">
                 <ul>
                     {% for msg in messages %}
-                    <li style="list-style: none;"><h5 style="color: black;" class="text-center">{{ msg }}</h5></li>
+                    <li style="list-style: none;"><h5 style="color: white;" class="text-center">{{ msg }}</h5></li>
                     {% endfor %}
                 </ul>
             </div>
             
-            <label for="title">Title</label>
+            <label for="title" style="color:#FFFFFF;">Title</label>
             <input id="review_title" type="text" placeholder="Review Title" name="Title" required></input>
             
-            <label for="course_name">Course Name</label>
-            <input id="course_name" type="text" placeholder="Course Name" name="Course" required></input>
+            <label for="course_name" style="color:#FFFFFF;">Course Number</label>
+            <input id="course_name" type="text" placeholder="Course Number (e.g. ACIT 1234)" name="Course" required></input>
             
-            <label for="instructor">Instructor</label>
+            <label for="instructor" style="color:#FFFFFF;">Instructor</label>
             <input id="instructor" type="text" placeholder="Course Instructor" name="Instructor" required></input>
 
-            <label for="rating">Rating</label>
+            <label for="rating" style="color:#FFFFFF;">Rating</label>
             <input id="rating" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
             
-            <textarea id="review_content" name="review_content" ></textarea>
+            <label for="review_content" style="color:#FFFFFF;">Review</label>
+            <textarea rows="10" cols="170" id="review_content" class="form-control"  name="review_content" ></textarea>
+            
             <div class="clearfix">
                 <input onClick="window.location.href='/userhome'" type="button" value="Cancel" class="cancelbtn" name="cancelbtn"></input>
                 <input type="submit" value="Save" class="submitbtn" name="submitbtn"></input>

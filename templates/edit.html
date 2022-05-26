@@ -12,50 +12,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/style.css') }}">
     <title>CRS edit</title>
 </head>
-<body>
+<body onload="editPost()">
     <nav class="horizonnav">
         <ul class="backtoindex">
             <li><a href="userhome"><img src="{{ url_for('static', filename='img/logo.png') }}" style=" margin-top:15px;" class="logoimg"></a></li>
         </ul>
 
         <ul class="navbar">
-            <li>
-                <div class="form-check form-switch">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                </div>
-            </li>
-            <li class="login"><a href="create">New</a></li>
-            <li style="padding-left: 1em;" class="signup"><a href="account">Account</a></li>
+            <li class="nav-item"><a href="userhome/averages">Averages</a></li>
+            <li class="nav-item"><a href="create">New</a></li>
         </ul>
     </nav>
     <div class="container">
         <form method="post">
-            <h1>Create New Review</h1>
-            <p style="margin-left:16px;">Fill out the following information and click "Save" to submit your review</p>
+            <h1 style="color:#FFFFFF;">Edit your Review</h1>
+            <p style="margin-left:16px;color:#FFFFFF;">Fill out the following information and click "Save" to submit your review</p>
             <hr>
 
             <div class="msgs">
                 <ul>
                     {% for msg in messages %}
-                    <li style="list-style: none;"><h5 style="color: black;" class="text-center">{{ msg }}</h5></li>
+                    <li style="list-style: none;"><h5 style="color: white;" class="text-center">{{ msg }}</h5></li>
                     {% endfor %}
                 </ul>
             </div>
             
-            <label for="title">Title</label>
+            <label for="title" style="color:#FFFFFF;">Title</label>
             <input id="review_title" value="{{review.title}}" type="text" placeholder="Review Title" name="Title" required></input>
             
-            <label for="course_name">Course Name</label>
+            <label for="course_name" style="color:#FFFFFF;">Course Name</label>
             <input id="course_name" value="{{review.course}}" type="text" placeholder="Course Name" name="Course" required></input>
             
-            <label for="instructor">Instructor</label>
+            <label for="instructor" style="color:#FFFFFF;">Instructor</label>
             <input id="instructor" value="{{review.instructor}}" type="text" placeholder="Course Instructor" name="Instructor" required></input>
 
-            <label for="rating">Rating</label>
+            <label for="rating" style="color:#FFFFFF;">Rating</label>
             <input id="rating" value="{{review.rating}}" type="text" placeholder="Course Rating (1-5)" name="Rating" required></input>
             
-            <textarea id="review_content" name="review_content" >{{review.content}}</textarea>
+            <textarea rows="10" cols="156" id="review_content" class="form-control" name="review_content" >{{review.content}}</textarea>
             <div style="margin-top: 1rem;" class="clearfix">
                 <!--<input onClick="window.location.href='/userhome'" type="button" value="Cancel" class="cancelbtn" name="cancelbtn"></input>-->
                 <!-- <button id="save" type="button" class="btn btn-info">save edit</button> -->
@@ -63,11 +57,10 @@
                 <!-- <button onClick="window.location.href='/userhome'" id="cancel" type="button" class="btn btn-secondary">cancel</button> -->
                 <input type="submit" name="cancelbtn" value="Cancel" class="btn btn-secondary">
                 <!-- <button type="button" class="btn btn-danger">delete </button> -->
-                <input type="submit" name="deletebtn" value="Delete" class="btn btn-danger">
+                <input type="submit" name="deletebtn" value="Delete" class="btn btn-danger" onclick="return deleteprompt('edit')">
             </div>
         </form>
     </div>
-
     <script src="{{url_for('static', filename='js/scrept.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

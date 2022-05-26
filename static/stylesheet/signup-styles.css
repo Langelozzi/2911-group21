@@ -26,6 +26,10 @@ hr {
   margin-bottom: 25px;
 }
 
+label {
+  color: white;
+}
+
 /* Set a style for all buttons */
 
 input:hover {

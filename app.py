@@ -6,7 +6,6 @@
 from functools import wraps
 from flask import Flask, render_template, request, jsonify, redirect, session
 from models.all_users import AllUsers
-from models.review import Review
 from models.user import User
 from models.review_collection import ReviewCollection
 import string
@@ -108,7 +107,7 @@ def homepage():
         search_string = request.form['search']
         
         # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
-        if request.form.get('sorted') == 'Submit':
+        if request.form.get('sorted') == 'Search':
             # determining if the chosen sort option was instructor or course number based on the value of the dropdown option
             if search_option.lower() == 'coursen':
                 # sorting the reviews and returning the homepage with the sorted reviews
@@ -238,6 +237,10 @@ def user_homepage(current_user):
     
     # if a post request is made to this enpoint. This happens when the form gets submitted
     if request.method == "POST":
+        # extracting the values of the drop down options and the string in the search box
+        search_option = request.form.get("teams")
+        search_string = request.form.get('search')
+
         # if edit button is clicked
         if request.form.get('editbtn') == 'Edit':
             # get the review id from the hidden input field value
@@ -246,20 +249,22 @@ def user_homepage(current_user):
             session["review_id"] = review_id
             return redirect("/edit")
         
-        # extracting the values of the drop down options and the string in the search box
-        search_option = request.form.get("teams")
-        search_string = request.form['search']
         # line 27 checks if the form submit button has been clicked. sorted = input name, Submit = input value
-        if request.form.get('sorted') == 'Submit':
+        if request.form.get('sorted') == 'Search':
             # determining if the chosen sort option was instructor or course number based on the value of the dropdown option
             if search_option.lower() == 'coursen':
                 # sorting the reviews and returning the homepage with the sorted reviews
                 sorted_reviews = collection.get_review_by_course(search_string)
-                return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+                return render_template("home_loggedin.html", reviews=sorted_reviews, user=current_user), 200
             elif search_option.lower() == 'instructor':
                 sorted_reviews = collection.get_review_by_instr(search_string)
-                return render_template("home_loggedin.html", reviews=sorted_reviews), 200
+                return render_template("home_loggedin.html", reviews=sorted_reviews, user=current_user), 200
 
+        # if request.form.get("deletebtn") == "Delete":
+        #     # get the review id from the hidden input field value
+        #     review_id = request.form.get("review_id", "")
+        #     # set the session object key to be the string of the id
+        #     session["review_id"] = review_id
 
     return render_template("home_loggedin.html", reviews=reviews, user=current_user), 200
 
@@ -270,7 +275,7 @@ def user_homepage(current_user):
 @token_required
 def create(current_user):
     if request.method == "POST":
-        review_title= request.form['Title']
+        review_title = request.form['Title']
         course_name = request.form['Course']
         instructor = request.form['Instructor']
         rating = request.form['Rating']
@@ -284,7 +289,7 @@ def create(current_user):
                 collection.save()
                 return redirect("/userhome")
             elif not added:
-                return render_template("create.html", messages=["Invalid Review contents: Review either contains foul language or an invalid rating number"])
+                return render_template("create.html", messages=["Invalid Review contents: Review either contains foul language, an invalid rating number, or invalid course number"])
 
     return render_template("create.html")
 
@@ -315,15 +320,37 @@ def edit(current_user):
             return redirect("/userhome")
         
         if request.form.get("deletebtn") == "Delete":
-            deleted = collection.delete_review(review_id)
-            collection.save()
-
-            if deleted:
-                return redirect("/userhome")
-            if not deleted:
-                return render_template("edit.html", review=correct_review, messages=["Review not found, therefore not deleted."])
+          session["review_id"] = request.form.get("review_id", "")
     
     return render_template("edit.html", review=correct_review)
+
+@app.route("/averages", methods=["GET"])
+def average_ratings():
+    collection = ReviewCollection()
+    avgs = collection.all_averages()
+
+    return render_template("averages.html", avgs=avgs)
+
+@app.route("/userhome/averages", methods=["GET"])
+@token_required
+def average_ratings_userhome(current_user):
+    collection = ReviewCollection()
+    avgs = collection.all_averages()
+
+    return render_template("averages_loggedin.html", avgs=avgs)
+
+@app.route("/delete", methods=["GET"])
+def delete_review():
+    review_id = session["review_id"]
+    
+    collection = ReviewCollection()
+    deleted = collection.delete_review(review_id)
+    collection.save()
+
+    if deleted:
+        return redirect("/userhome")
+    if not deleted:
+        return jsonify({"Error": "Review not found"})
 
 
 # starting app in debug mode if ran
