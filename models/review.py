@@ -50,7 +50,10 @@ class Review:
         self.id = id
         self.user_email = user_email
         self.title = title
-        self.course = f"{course[:4].upper()} {course[4:]}"
+        if " " in course:
+          self.course = f"{course[:4].upper()}{course[4:]}"
+        else:
+          self.course = f"{course[:4].upper()} {course[4:]}"
         self.instructor = instructor
         self.content = review
         self.rating = rating 
