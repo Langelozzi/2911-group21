@@ -6,7 +6,6 @@
 from functools import wraps
 from flask import Flask, render_template, request, jsonify, redirect, session
 from models.all_users import AllUsers
-from models.review import Review
 from models.user import User
 from models.review_collection import ReviewCollection
 import string
@@ -261,11 +260,11 @@ def user_homepage(current_user):
                 sorted_reviews = collection.get_review_by_instr(search_string)
                 return render_template("home_loggedin.html", reviews=sorted_reviews, user=current_user), 200
 
-        if request.form.get("deletebtn") == "Delete":
-            # get the review id from the hidden input field value
-            review_id = request.form.get("review_id", "")
-            # set the session object key to be the string of the id
-            session["review_id"] = review_id
+        # if request.form.get("deletebtn") == "Delete":
+        #     # get the review id from the hidden input field value
+        #     review_id = request.form.get("review_id", "")
+        #     # set the session object key to be the string of the id
+        #     session["review_id"] = review_id
 
     return render_template("home_loggedin.html", reviews=reviews, user=current_user), 200
 
