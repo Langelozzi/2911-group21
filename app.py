@@ -290,7 +290,7 @@ def create(current_user):
                 collection.save()
                 return redirect("/userhome")
             elif not added:
-                return render_template("create.html", messages=["Invalid Review contents: Review either contains foul language or an invalid rating number"])
+                return render_template("create.html", messages=["Invalid Review contents: Review either contains foul language, an invalid rating number, or invalid course number"])
 
     return render_template("create.html")
 
